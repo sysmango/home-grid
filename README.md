@@ -4,9 +4,12 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This project is to automate the rebuild of the grid machines.
+The intent is to rebuild all the machine to the same snapshot of the distribution and then collect the machines into a docker swarm.
+
+Automation will be done via ansible.
+
+Initial development and testing will be done against a collection of VirtualBox-hosted vagrantboxes.
 
 ### How do I get set up? ###
 
