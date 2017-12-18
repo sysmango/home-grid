@@ -1,0 +1,22 @@
+---
+
+- name: Install docker components
+  zypper:
+    name: docker
+    state: present
+    
+- name: Enable and start docker service
+  service: 
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Install python-docker
+  zypper:
+    name: python-docker
+    state: present
+
+- user:
+    name: vagrant
+    groups: docker
+    append: yes

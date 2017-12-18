@@ -1,0 +1,63 @@
+---
+- name: Initial install of docker on all hosts
+  hosts: all
+  become: true
+  roles: 
+  - docker
+
+# - name: Docker swarm manager setup
+#   hosts: manager
+#   become: true
+#   roles: 
+#   - dockermanager
+
+# - name: Docker worker setup
+#   hosts: worker
+#   become: true
+#   roles: 
+#   - dockerworker
+
+- name: Docker Manager
+  hosts: docker-manager
+  gather_facts: True
+  become: true
+  roles:
+    #- defunctzombie.coreos-bootstrap
+    - { role: docker-swarm, step: boostrap-manager-steps }
+
+
+- name: Docker Worker
+  hosts: docker-worker
+  become: true
+  roles:
+          #- defunctzombie.coreos-bootstrap
+    - { role: docker-swarm, step: boostrap-worker-steps }
+
+# Hosts group are created when boostrap-worker-steps and boostrap-manager-steps run
+- name: Docker Manager boostrap
+  hosts: docker-manager-boostrap
+  become: true
+  roles:
+    - { role: docker-swarm, step: manager-boostrap }
+
+
+- name: Retreive the join token
+  hosts: docker-manager-operational[0]
+  roles:
+    - { role: docker-swarm, step: retreive-join-token }
+
+- name: Join - manager nodes
+  hosts: docker-manager-boostrap:!docker-manager-operational
+  roles:
+    - { role: docker-swarm, step: join-manager-nodes }
+
+- name: Docker Worker boostrap
+  hosts: docker-worker-boostrap
+  become: true
+  roles:
+    - { role: docker-swarm, step: docker-worker-boostrap }
+
+- name: Join - worker nodes
+  hosts: docker-swarm-worker-bootstrap
+  roles:
+    - { role: docker-swarm, step: worker-bootstrap }
