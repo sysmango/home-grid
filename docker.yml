@@ -1,28 +1,17 @@
 ---
+
 - name: Initial install of docker on all hosts
   hosts: all
   become: true
-  roles: 
+  roles:
   - docker
-
-# - name: Docker swarm manager setup
-#   hosts: manager
-#   become: true
-#   roles: 
-#   - dockermanager
-
-# - name: Docker worker setup
-#   hosts: worker
-#   become: true
-#   roles: 
-#   - dockerworker
+  - sshhost 
 
 - name: Docker Manager
   hosts: docker-manager
   gather_facts: True
   become: true
   roles:
-    #- defunctzombie.coreos-bootstrap
     - { role: docker-swarm, step: boostrap-manager-steps }
 
 
@@ -30,7 +19,6 @@
   hosts: docker-worker
   become: true
   roles:
-          #- defunctzombie.coreos-bootstrap
     - { role: docker-swarm, step: boostrap-worker-steps }
 
 # Hosts group are created when boostrap-worker-steps and boostrap-manager-steps run

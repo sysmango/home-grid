@@ -1,12 +1,12 @@
 ---
 - name: Boostrap managers status
-  include: boostrap-manager-steps.yml
+  include_tasks: boostrap-manager-steps.yml
   when: step == "boostrap-manager-steps"
 
-- include: manager-boostrap.yml
+- include_tasks: manager-boostrap.yml
   when: step == "manager-boostrap"
 
-- include: retreive-join-token.yml
+- include_tasks: retreive-join-token.yml
   when: step == "retreive-join-token"
 
 - name: join manager nodes to cluster
@@ -18,7 +18,7 @@
     {{ groups['docker-swarm-manager-ips'][0] }}:2377
 
 - name: Boostrap worker status
-  include: boostrap-worker-steps.yml
+  include_tasks: boostrap-worker-steps.yml
   when: step == "boostrap-worker-steps"
 
 - name: join worker nodes to cluster

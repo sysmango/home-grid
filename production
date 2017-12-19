@@ -1,6 +1,11 @@
-[manager]
-grid010
+[docker-manager]
+grid011
 
-[worker]
-grid010
+[docker-worker]
+grid100
+grid111
+
+[bootstrap]
+grid011
+grid100
 grid111

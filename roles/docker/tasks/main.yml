@@ -20,3 +20,9 @@
     name: vagrant
     groups: docker
     append: yes
+
+- user:
+    name: butch
+    groups: docker
+    append: yes
+
