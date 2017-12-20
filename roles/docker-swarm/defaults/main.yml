@@ -1,2 +1,0 @@
----
-docker_swarm_iface: {{ ansible_eth0.ipv4.address }}
