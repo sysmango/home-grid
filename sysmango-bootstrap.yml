@@ -1,0 +1,14 @@
+---
+- name: Bootstrap new sysmango servers.
+  become: yes
+  gather_facts: no
+  hosts:
+    - bootstrap
+  roles:
+          - sysmango-bootstrap
+  tasks:
+    - name: Perform zypper dist-upgrade to upgrade to latest Tumbleweed snapshot
+      zypper: name=* state=dist-upgrade
+      notify: 
+      - reboot linux
+

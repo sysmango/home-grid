@@ -1,0 +1,32 @@
+---
+
+- name: Setup local non-root user
+  user:
+    name: butch
+    shell: /bin/bash
+
+- name: Set authorized key took from url
+  authorized_key:
+    user: butch
+    state: present 
+    key: "{{ lookup('file', '/home/butch/.ssh/id_rsa.pub') }}"
+
+- name: Make sure we have a 'wheel' group
+  group:
+    name: wheel
+    state: present
+
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: Add butch to %wheel
+  user: 
+    name: butch
+    groups: wheel
+    append: true
+
