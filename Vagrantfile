@@ -29,7 +29,7 @@ Vagrant.configure(2) do |config|
     worker.vm.network "private_network", ip: "192.168.33.13"
     # node.vm.network "forwarded_port", guest: 80, host: 8080
     worker.vm.provision "ansible" do |ansible|
-      ansible.playbook = "docker.yml"
+      ansible.playbook = "site.yml"
       #ansible.playbook = "swarm-facts.yml"
       ansible.limit = "all"
       ansible.extra_vars = {
@@ -37,8 +37,9 @@ Vagrant.configure(2) do |config|
       }
       #ansible.verbose = "v"
       ansible.groups = {
-        "docker-manager" => ["manager"],
-        "docker-worker"  => ["worker"],
+        "k8s-master" => ["manager"],
+        "k8s-node"  => ["worker"],
+        "bootstrap" => ["manager"],
       }
       # ansible.raw_arguments = [
       #   "-M ./library"

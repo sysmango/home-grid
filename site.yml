@@ -1,9 +1,10 @@
 ---
 - name: Bootstrap new sysmango servers.
+  hosts: k8s-master
   become: yes
   gather_facts: no
-  hosts:
-    - bootstrap
+  # hosts:
+  #   - bootstrap
   roles:
           - sysmango-bootstrap
           - kubernetes-master

@@ -5,11 +5,11 @@
     name: butch
     shell: /bin/bash
 
-- name: Set authorized key took from url
-  authorized_key:
-    user: butch
-    state: present 
-    key: "{{ lookup('file', '/home/butch/.ssh/id_rsa.pub') }}"
+# - name: Set authorized key took from url
+#   authorized_key:
+#     user: butch
+#     state: present 
+#     key: "{{ lookup('file', '/home/butch/.ssh/id_rsa.pub') }}"
 
 - name: Make sure we have a 'wheel' group
   group:
@@ -18,9 +18,9 @@
 
 - name: Allow 'wheel' group to have passwordless sudo
   lineinfile:
-    dest: /etc/sudoers
+    path: /etc/sudoers
     state: present
-    regexp: '^%wheel'
+    regexp: '^%wheel\s'
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
     validate: 'visudo -cf %s'
 
@@ -30,3 +30,15 @@
     groups: wheel
     append: true
 
+- name: Ignore lid switch
+  lineinfile: 
+    path: /etc/systemd/logind.conf
+    line: HandleLidSwitchDocked=ignore
+    state: present
+
+- name: Perform zypper dist-upgrade to upgrade to latest Tumbleweed snapshot
+  zypper: name=* state=dist-upgrade
+  notify: 
+  - reboot linux
+  # when: ansible_os_family == "Suse"
+      
