@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   config.vm.provider "virtualbox" do |v|
-    v.memory = 2048
+    v.memory = 512
   end
 
   config.vm.define "manager" do |manager1|
@@ -41,9 +41,8 @@ Vagrant.configure(2) do |config|
        }
     #ansible.verbose = "v"
       ansible.groups = {
-        "k8s-master" => ["manager"],
-        "k8s-node"  => ["worker"],
-        "bootstrap" => ["manager", "worker"],
+        "docker-manager" => ["manager"],
+        "docker-worker"  => ["worker"],
       }
     end
   end  

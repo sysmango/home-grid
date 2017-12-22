@@ -5,21 +5,4 @@
   gather_facts: no
   roles:
   - sysmango-bootstrap
-  - kubernetes-master
 
-- name: Bootstrap sysmango k8s-master.
-  become: yes
-  gather_facts: no
-  hosts:
-  - k8s-master
-  roles:
-  - kubernetes-master
-
-- name: Bootstrap sysmango k8s-nodes.
-  become: yes
-  gather_facts: no
-  hosts:
-    - k8s-node
-  roles:
-  - kubernetes-node
-  
