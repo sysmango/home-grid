@@ -21,6 +21,7 @@
   - 'kubernetes-node'
   - 'python-docker'
   - 'python2-docker'
+  - 'kubernetes-kubeadm'
   - 'flannel'
 
 - name: Enable docker service
