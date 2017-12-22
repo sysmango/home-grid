@@ -15,17 +15,13 @@
     name: '{{ item }}'
     state: present
   with_items:
-  - 'kubernetes-master'
   - 'docker_1_12_6'
   - 'kubernetes-common'
   - 'kubernetes-kubelet'
   - 'kubernetes-node'
-  - 'kubernetes-client'
   - 'python-docker'
   - 'python2-docker'
-  - 'kubernetes-kubeadm'
   - 'flannel'
-  - 'etcd'
 
 - name: Enable docker service
   service: 

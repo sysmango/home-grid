@@ -3,7 +3,9 @@
 
 Vagrant.configure(2) do |config|
   #config.vm.box = "ubuntu/xenial64"
-  config.vm.box = "opensuse/openSUSE-Tumbleweed-x86_64"
+  #config.vm.box = "opensuse/openSUSE-Tumbleweed-x86_64"
+	config.vm.box = "sysmango/tumbleweed"
+	config.vm.box_url = "http://localhost/~butch/tumbleweed/tumbleweed.json"
   # config.vm.box_check_update = false
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
@@ -17,12 +19,11 @@ Vagrant.configure(2) do |config|
     # node.vm.network "forwarded_port", guest: 80, host: 8080
   end
 
-  # config.vm.define "worker2" do |worker2|
-  #   worker2.vm.hostname = "worker2"
-  #   worker2.vm.network "private_network", ip: "192.168.33.12"
-  #   # node.vm.network "forwarded_port", guest: 80, host: 8080
-    
-  # end
+  config.vm.define "worker2" do |worker2|
+    worker2.vm.hostname = "worker2"
+    worker2.vm.network "private_network", ip: "192.168.33.12"
+    # node.vm.network "forwarded_port", guest: 80, host: 8080   
+  end
 
   config.vm.define "worker" do |worker|
     worker.vm.hostname = "worker"
@@ -34,16 +35,13 @@ Vagrant.configure(2) do |config|
       ansible.limit = "all"
       ansible.extra_vars = {
         swarm_iface: "eth1"
-      }
-      #ansible.verbose = "v"
+       }
+    #ansible.verbose = "v"
       ansible.groups = {
         "k8s-master" => ["manager"],
         "k8s-node"  => ["worker"],
-        "bootstrap" => ["manager"],
+        "bootstrap" => ["manager", "worker"],
       }
-      # ansible.raw_arguments = [
-      #   "-M ./library"
-      # ]
     end
   end  
 end
