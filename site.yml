@@ -5,7 +5,16 @@
   gather_facts: no
   roles:
   - sysmango-bootstrap
+
+- name: Install Docker packages.
+  hosts: all
+  become: yes
+  gather_facts: no
+  roles:
   - docker-install
 
 
-
+- name: Docker bootstrap
+  become: true
+  roles:
+  - docker-bootstrap
