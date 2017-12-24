@@ -5,12 +5,6 @@
     name: docker
     state: present
 
-- name: Enable and start Docker
-  service:
-    name: docker
-    state: started
-    enabled: yes
-
 - name: Add butch to docker
   user: 
     name: butch

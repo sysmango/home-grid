@@ -13,11 +13,36 @@
   roles:
   - docker-install
 
-- name: Install etcd packages.
+- name: Install and configure etcd packages.
   hosts: all
   become: yes
   gather_facts: yes
   roles:
   - etcd-install
 
+- name: Install and configure flannel packages.
+  hosts: all
+  become: yes
+  gather_facts: yes
+  roles:
+  - flannel-install
+
+- name: Enable and start Docker
+  hosts: all
+  become: yes
+  tasks:
+  - name: Docker Service 
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+
 - import_playbook: swarm.yml
+
+- name: Deploy SMTP service to swarm
+  hosts: docker-manager
+  gather_facts: no
+  roles:
+  - smtp-service
+  
