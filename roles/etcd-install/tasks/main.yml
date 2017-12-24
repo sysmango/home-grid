@@ -1,0 +1,21 @@
+---
+
+- name: Install etcd package 
+  zypper:
+    name: etcd
+    state: present
+
+- name: Install etcdctl package 
+  zypper:
+    name: etcdctl
+    state: present
+
+- name: Configure etcd sysconfig
+  template: 
+    src: etcd.j2
+    dest: /etc/sysconfig/etcd
+
+- name: Enable and start etcd
+  service:
+    name: etcd
+    state: started

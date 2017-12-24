@@ -1,0 +1,12 @@
+---
+
+- name: Install Docker package 
+  zypper:
+    name: docker
+    state: present
+
+- name: Add butch to docker
+  user: 
+    name: butch
+    groups: docker
+    append: true

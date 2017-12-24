@@ -5,21 +5,44 @@
   gather_facts: no
   roles:
   - sysmango-bootstrap
-  - kubernetes-master
 
-- name: Bootstrap sysmango k8s-master.
+- name: Install Docker packages.
+  hosts: all
   become: yes
   gather_facts: no
-  hosts:
-  - k8s-master
   roles:
-  - kubernetes-master
+  - docker-install
 
-- name: Bootstrap sysmango k8s-nodes.
+- name: Install and configure etcd packages.
+  hosts: all
   become: yes
-  gather_facts: no
-  hosts:
-    - k8s-node
+  gather_facts: yes
   roles:
-  - kubernetes-node
+  - etcd-install
+
+- name: Install and configure flannel packages.
+  hosts: all
+  become: yes
+  gather_facts: yes
+  roles:
+  - flannel-install
+
+- name: Enable and start Docker
+  hosts: all
+  become: yes
+  tasks:
+  - name: Docker Service 
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+
+- import_playbook: swarm.yml
+
+- name: Deploy SMTP service to swarm
+  hosts: docker-manager
+  gather_facts: no
+  roles:
+  - smtp-service
   
