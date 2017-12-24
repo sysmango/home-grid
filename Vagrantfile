@@ -30,14 +30,14 @@ Vagrant.configure(2) do |config|
   config.vm.define "worker" do |worker|
     worker.vm.hostname = "worker"
     worker.vm.network "private_network", ip: "192.168.33.13"
-    worker.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.manager/192\.168\.33\.13 manager/' -i /etc/hosts"
+    worker.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.manager/192\.168\.33\.13 worker/' -i /etc/hosts"
     # node.vm.network "forwarded_port", guest: 80, host: 8080
     worker.vm.provision "ansible" do |ansible|
       ansible.playbook = "site.yml"
       #ansible.playbook = "swarm-facts.yml"
       ansible.limit = "all"
       ansible.extra_vars = {
-        swarm_iface: "eth1"
+         swarm_iface: "enp0s8"
        }
     #ansible.verbose = "v"
       ansible.groups = {

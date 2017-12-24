@@ -10,3 +10,9 @@
     name: docker
     state: started
     enabled: yes
+
+- name: Add butch to docker
+  user: 
+    name: butch
+    groups: docker
+    append: true

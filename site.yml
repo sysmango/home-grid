@@ -13,8 +13,11 @@
   roles:
   - docker-install
 
-
-- name: Docker bootstrap
-  become: true
+- name: Install etcd packages.
+  hosts: all
+  become: yes
+  gather_facts: yes
   roles:
-  - docker-bootstrap
+  - etcd-install
+
+- import_playbook: swarm.yml
