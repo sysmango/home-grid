@@ -45,4 +45,16 @@
   gather_facts: no
   roles:
   - smtp-service
+
+# - name: Install rexray to cluster
+#   hosts: all
+#   roles: 
+#   - { role: emccode.rexray,
+#       rexray_service: true,
+#       rexray_storage_drivers: [gce] }
+
+- name: Setup NFS server
+  hosts: nfs-server
+  roles:
+  - nfs-server
   

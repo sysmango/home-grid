@@ -9,3 +9,6 @@ grid111
 grid011
 grid100
 grid111
+
+[nfs-server]
+grid011
