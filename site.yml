@@ -13,19 +13,19 @@
   roles:
   - docker-install
 
-- name: Install and configure etcd packages.
-  hosts: all
-  become: yes
-  gather_facts: yes
-  roles:
-  - etcd-install
+# - name: Install and configure etcd packages.
+#   hosts: all
+#   become: yes
+#   gather_facts: yes
+#   roles:
+#   - etcd-install
 
-- name: Install and configure flannel packages.
-  hosts: all
-  become: yes
-  gather_facts: yes
-  roles:
-  - flannel-install
+# - name: Install and configure flannel packages.
+#   hosts: all
+#   become: yes
+#   gather_facts: yes
+#   roles:
+#   - flannel-install
 
 - name: Enable and start Docker
   hosts: all
@@ -37,24 +37,30 @@
       state: started
       enabled: yes
 
-
 - import_playbook: swarm.yml
-
-- name: Deploy SMTP service to swarm
-  hosts: docker-manager
-  gather_facts: no
-  roles:
-  - smtp-service
-
-# - name: Install rexray to cluster
-#   hosts: all
-#   roles: 
-#   - { role: emccode.rexray,
-#       rexray_service: true,
-#       rexray_storage_drivers: [gce] }
 
 - name: Setup NFS server
   hosts: nfs-server
+  become: yes
+  gather_facts: no
   roles:
   - nfs-server
-  
+
+- name: Setup NFS clients
+  hosts: all
+  become: yes
+  gather_facts: no
+  roles:
+  - nfs-client
+
+- name: Setup Swarm overlay network
+  hosts: docker-manager
+  # shell: docker network create --driver overlay mangonet
+  roles:
+  - mangonet
+
+# - name: Deploy SMTP service to swarm
+#   hosts: docker-manager
+#   gather_facts: no
+#   roles:
+#   - smtp-service

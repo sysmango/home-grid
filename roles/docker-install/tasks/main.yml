@@ -10,3 +10,8 @@
     name: butch
     groups: docker
     append: true
+
+- name: Install Docker python client
+  zypper: 
+    name: python-docker
+    state: present
