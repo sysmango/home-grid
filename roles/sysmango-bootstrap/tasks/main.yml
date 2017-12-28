@@ -36,15 +36,15 @@
     line: HandleLidSwitchDocked=ignore
     state: present
 
-- name: Add Tumbleweed update repoistory
-  zypper_repository:
-    name: update-repo
-    repo: http://download.opensuse.org/update/tumbleweed/
-    state: present
-    auto_import_keys: yes
-    enabled: yes
-    autorefresh: yes
-    runrefresh: yes
+# - name: Add Tumbleweed update repoistory
+#   zypper_repository:
+#     name: update-repo
+#     repo: http://download.opensuse.org/update/tumbleweed/
+#     state: present
+#     auto_import_keys: yes
+#     enabled: yes
+#     autorefresh: yes
+#     runrefresh: yes
 
 - name: Perform zypper dist-upgrade to upgrade to latest Tumbleweed snapshot
   zypper: name=* state=dist-upgrade

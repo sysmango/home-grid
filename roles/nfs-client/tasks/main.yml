@@ -1,0 +1,16 @@
+---
+
+- name: Setup NFS client mount point for volumes
+  become: yes
+  file: 
+    path: /srv/docker-volumes
+    state: directory
+    mode: 777
+
+- name: Mount NFS volume root
+  mount:
+    path: /srv/docker-volumes
+    src: grid011.sysmango.net:/srv/nfs
+    fstype: nfs
+    opts: rw
+    state: mounted

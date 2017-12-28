@@ -7,3 +7,27 @@
   with_items:
   - "nfs-kernel-server"
   - "yast2-nfs-server"
+
+- name: Create root nfs directory
+  file:
+    path: /srv/nfs
+    mode: 0777
+    state: directory
+
+- name: Create test nfs directory
+  file:
+    path: /srv/nfs/test
+    mode: 0777
+    state: directory
+
+- name: Export test nfs directory for testing
+  lineinfile:
+    path: /etc/exports
+    line: /srv/nfs/test *(rw)
+
+- name: Enable and start NFS server
+  service:
+    name: nfsserver
+    state: started
+    enabled: yes
+
