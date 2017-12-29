@@ -1,0 +1,12 @@
+---
+
+- name: Create jenkins volume directory
+  hosts: docker-manager
+  file:
+    path: /srv/nfs/jenkins
+    mode: 777
+    state: directory
+
+- name: Deploy jenkins service
+  hosts: docker-manager
+  shell: docker service create -d --name jenkins --network mangonet --mount type=bind,src=/srv/docker-volumes/jenkins,dst=/var/jenkins_home  --publish 8080:8080 --replicas 1 jenkinsci/blueocean:latest
