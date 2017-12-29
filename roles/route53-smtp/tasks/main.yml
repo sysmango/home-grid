@@ -1,0 +1,22 @@
+---
+
+- name: Register smtp name with Route53
+  route53:
+    state: present
+    zone: sysmango.net
+    record: smtp.sysmango.net
+    type: CNAME
+    value: sysmango.net
+    overwrite: yes
+    wait: yes
+
+
+- name: Register registry name with Route53
+  route53:
+    state: present
+    zone: sysmango.net
+    record: registry.sysmango.net
+    type: CNAME
+    value: sysmango.net
+    overwrite: yes
+    wait: yes

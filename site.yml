@@ -1,8 +1,9 @@
 ---
+
 - name: Bootstrap new sysmango servers.
   hosts: all
   become: yes
-  gather_facts: no
+  gather_facts: yes
   roles:
   - sysmango-bootstrap
 
@@ -46,16 +47,15 @@
   roles:
   - nfs-server
 
-- name: Setup NFS clients
-  hosts: all
-  become: yes
-  gather_facts: no
-  roles:
-  - nfs-client
+# - name: Setup NFS clients
+#   hosts: all
+#   become: yes
+#   gather_facts: no
+#   roles:
+#   - nfs-client
 
 - name: Setup Swarm overlay network
   hosts: docker-manager
-  # shell: docker network create --driver overlay mangonet
   roles:
   - mangonet
 
@@ -64,3 +64,5 @@
 #   gather_facts: no
 #   roles:
 #   - smtp-service
+#   - registry-service
+#   - database-service

@@ -51,4 +51,30 @@
   notify: 
   - reboot linux
   # when: ansible_os_family == "Suse"
-      
+
+- name: Add python2-boto 
+  zypper: 
+    name: python2-boto
+    state: present
+
+- name: Add route53 entries
+  connection: local
+  become: no 
+  route53:
+    state: present
+    zone: sysmango.net
+    record: "{{ inventory_hostname}}.sysmango.net"
+    type: A
+    value: "{{ ansible_default_ipv4.address }}"
+    overwrite: yes
+    wait: yes
+
+# - name: Add CNAME for sysmango.net
+#   route53:
+#     state: present
+#     zone: sysmango.net
+#     record: "{{ inventory_hostname}}.sysmango.net"
+#     type: CNAME
+#     value: "{{ ansible_defaults_ipv4.address }}"
+#     overwrite: yes
+#     wait: yes

@@ -1,0 +1,12 @@
+---
+
+- name: Create volume directory
+  hosts: docker-manager
+  file:
+    path: /srv/nfs/postgres
+    state: directory
+    mode: 777
+
+- name: Deploy postgresql service
+  hosts: docker-manager
+  shell: docker service create -d --name postgres --network mangonet --mount type=bind,src=/srv/docker-volumes/postgres,dst=/var/lib/postgresql/data --replicas 1 registry.sysmango.net:5000/postgres:latest
