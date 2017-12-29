@@ -1,0 +1,23 @@
+---
+
+- name: Check if Jira service is running
+  shell: docker service ls | awk '{print $2}' | grep jira
+  changed_when: true
+  ignore_errors: true
+  failed_when: rc > 1
+  register: jira_status 
+
+- name: Create volume directory
+  hosts: nfs-server[0]
+  file:
+    path: /srv/nfs/jira
+    state: directory
+    mode: 777
+  any_errors_fatal: true
+  when: jira_status|changed
+
+- name: Deploy jira service
+  hosts: docker-manager[0]
+  shell: docker service create -d --name jira --network mangonet --mount type=bind,src=/srv/docker-volumes/jira,dst=/var/atlassian/jira --replicas 1 cptactionhank/atlassian-jira-software:latest
+  run_once: true
+  when: jira_status|changed

@@ -62,7 +62,9 @@
 - name: Deploy SMTP service to swarm
   hosts: docker-manager
   gather_facts: no
+  ignore_errors: yes
   roles:
   - registry-service
   - smtp-service
   - database-service
+  - jenkins-service

@@ -1,12 +1,23 @@
 ---
 
+- name: Check if Jenkins service is running
+  shell: docker service ls | awk '{print $2}' | grep jenkins
+  changed_when: true
+  ignore_errors: true
+  failed_when: jenkins_status.rc == 2
+  register: jenkins_status 
+
 - name: Create jenkins volume directory
-  hosts: docker-manager
+  hosts: nfs-server[0]
   file:
     path: /srv/nfs/jenkins
     mode: 777
     state: directory
+  run_once: true
+  when: jenkins_status|changed
 
 - name: Deploy jenkins service
-  hosts: docker-manager
-  shell: docker service create -d --name jenkins --network mangonet --mount type=bind,src=/srv/docker-volumes/jenkins,dst=/var/jenkins_home  --publish 8080:8080 --replicas 1 jenkinsci/blueocean:latest
+  hosts: docker-manager[0]
+  shell: docker service create -d --name jenkins --network mangonet --mount type=bind,src=/srv/docker-volumes/jenkins,dst=/var/jenkins_home --replicas 1 jenkinsci/blueocean:latest
+  run_once: true
+  when: jenkins_status|changed

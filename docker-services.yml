@@ -7,10 +7,11 @@
   - route53-smtp
   
 - name: Deploy docker services
-  hosts: docker-manager
+  hosts: docker-manager[0]
   become: yes
   roles:
-  # - registry-service
-  # - smtp-service
-  # - database-service
+  - registry-service
+  - smtp-service
+  - database-service
   - jenkins-service
+  # - jira-service

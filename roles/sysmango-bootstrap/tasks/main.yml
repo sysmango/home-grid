@@ -36,21 +36,10 @@
     line: HandleLidSwitchDocked=ignore
     state: present
 
-# - name: Add Tumbleweed update repoistory
-#   zypper_repository:
-#     name: update-repo
-#     repo: http://download.opensuse.org/update/tumbleweed/
-#     state: present
-#     auto_import_keys: yes
-#     enabled: yes
-#     autorefresh: yes
-#     runrefresh: yes
-
 - name: Perform zypper dist-upgrade to upgrade to latest Tumbleweed snapshot
   zypper: name=* state=dist-upgrade
   notify: 
   - reboot linux
-  # when: ansible_os_family == "Suse"
 
 - name: Add python2-boto 
   zypper: 
@@ -68,13 +57,4 @@
     value: "{{ ansible_default_ipv4.address }}"
     overwrite: yes
     wait: yes
-
-# - name: Add CNAME for sysmango.net
-#   route53:
-#     state: present
-#     zone: sysmango.net
-#     record: "{{ inventory_hostname}}.sysmango.net"
-#     type: CNAME
-#     value: "{{ ansible_defaults_ipv4.address }}"
-#     overwrite: yes
-#     wait: yes
+    
