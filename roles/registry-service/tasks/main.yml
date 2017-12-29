@@ -2,10 +2,10 @@
 
 - name: setup daemon.json
   become: yes
-  file: 
+  copy: 
     src: daemon.json
-    destination: /etc/docker/daemon.json
+    dest: /etc/docker/daemon.json
 
-# - name: Deploy insecure docker registry service
-#   hosts: docker-manager
-#   shell: docker service create -d --name registry --mount type=bind,src=/srv/docker-volumes/registry,dst=/var/lib/registry --publish published=5000,target=5000 --replicas 1 registry:2
+- name: Deploy insecure docker registry service
+  hosts: docker-manager
+  shell: docker service create -d --name registry --mount type=bind,src=/srv/docker-volumes/registry,dst=/var/lib/registry --publish published=5000,target=5000 --replicas 1 registry:2
