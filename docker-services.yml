@@ -8,7 +8,6 @@
   
 - name: Deploy docker services
   hosts: docker-manager[0]
-  become: yes
   roles:
   - registry-service
   - smtp-service
