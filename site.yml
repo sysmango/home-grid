@@ -59,10 +59,10 @@
   roles:
   - mangonet
 
-# - name: Deploy SMTP service to swarm
-#   hosts: docker-manager
-#   gather_facts: no
-#   roles:
-#   - smtp-service
-#   - registry-service
-#   - database-service
+- name: Deploy SMTP service to swarm
+  hosts: docker-manager
+  gather_facts: no
+  roles:
+  - registry-service
+  - smtp-service
+  - database-service
