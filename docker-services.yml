@@ -1,0 +1,16 @@
+---
+
+- name: Do route53 work
+  hosts: 127.0.0.1
+  connection: local
+  roles:
+  - route53-smtp
+  
+- name: Deploy docker services
+  hosts: docker-manager
+  become: yes
+  roles:
+  # - registry-service
+  # - smtp-service
+  # - database-service
+  - jenkins-service

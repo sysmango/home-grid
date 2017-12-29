@@ -1,8 +1,9 @@
 ---
+
 - name: Bootstrap new sysmango servers.
   hosts: all
   become: yes
-  gather_facts: no
+  gather_facts: yes
   roles:
   - sysmango-bootstrap
 
@@ -13,19 +14,19 @@
   roles:
   - docker-install
 
-- name: Install and configure etcd packages.
-  hosts: all
-  become: yes
-  gather_facts: yes
-  roles:
-  - etcd-install
+# - name: Install and configure etcd packages.
+#   hosts: all
+#   become: yes
+#   gather_facts: yes
+#   roles:
+#   - etcd-install
 
-- name: Install and configure flannel packages.
-  hosts: all
-  become: yes
-  gather_facts: yes
-  roles:
-  - flannel-install
+# - name: Install and configure flannel packages.
+#   hosts: all
+#   become: yes
+#   gather_facts: yes
+#   roles:
+#   - flannel-install
 
 - name: Enable and start Docker
   hosts: all
@@ -37,12 +38,31 @@
       state: started
       enabled: yes
 
-
 - import_playbook: swarm.yml
+
+- name: Setup NFS server
+  hosts: nfs-server
+  become: yes
+  gather_facts: no
+  roles:
+  - nfs-server
+
+# - name: Setup NFS clients
+#   hosts: all
+#   become: yes
+#   gather_facts: no
+#   roles:
+#   - nfs-client
+
+- name: Setup Swarm overlay network
+  hosts: docker-manager
+  roles:
+  - mangonet
 
 - name: Deploy SMTP service to swarm
   hosts: docker-manager
   gather_facts: no
   roles:
+  - registry-service
   - smtp-service
-  
+  - database-service
