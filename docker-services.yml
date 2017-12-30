@@ -12,6 +12,6 @@
   - registry-service
   - smtp-service
   - database-service
-  - reverseproxy-service
+  - jira-service
   - jenkins-service
-  # - jira-service
+  - reverseproxy-service
