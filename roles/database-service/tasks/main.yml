@@ -2,7 +2,7 @@
 
 - name: Check if postgres service is running
   shell: docker service ls | awk '{print $2}' | grep postgres
-  changed_when: true
+  changed_when: false
   register: postgres_status
   failed_when: postgres_status.rc == 2
 

@@ -2,8 +2,8 @@
 
 - name: Check if SMTP service is running
   shell: docker service ls | awk '{print $2}' | grep smtp
-  changed_when: true
-  ignore_errors: false
+  changed_when: false
+  ignore_errors: true
   register: smtp_status
   failed_when: smtp_status.rc == 2 
 
