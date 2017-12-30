@@ -14,10 +14,10 @@
     mode: 777
     state: directory
   run_once: true
-  when: jenkins_status|changed
+  when: jenkins_status.rc == 1
 
 - name: Deploy jenkins service
   hosts: docker-manager[0]
-  shell: docker service create -d --name jenkins --network mangonet --mount type=bind,src=/srv/docker-volumes/jenkins,dst=/var/jenkins_home --replicas 1 jenkinsci/blueocean:latest
+  shell: docker service create -d --name jenkins --network mangonet --mount type=bind,src=/srv/docker-volumes/jenkins,dst=/var/jenkins_home --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock --replicas 1 jenkinsci/blueocean:latest
   run_once: true
-  when: jenkins_status|changed
+  when: jenkins_status.rc == 1

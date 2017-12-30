@@ -14,9 +14,9 @@
     path: /srv/nfs/postgres/pgdata
     state: directory
     mode: 777
-  when: postgres_status|changed
+  when: postgres_status.rc == 1
 
 - name: Deploy postgresql service
   hosts: docker-manager
   shell: docker service create -d --name postgres --network mangonet --mount type=bind,src=/srv/docker-volumes/postgres/pgdata,dst=/var/lib/postgresql/data --env PGDATA=/var/lib/postgresql/data/pgdata --replicas 1 registry.sysmango.net:5000/postgres:latest
-  when: postgres_status|changed
+  when: postgres_status.rc == 1
