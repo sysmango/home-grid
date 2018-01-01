@@ -5,7 +5,7 @@
   file: 
     path: /srv/docker-volumes
     state: directory
-    mode: 777
+    mode: 0777
 
 - name: Mount NFS volume root
   become: yes

@@ -1,22 +1,90 @@
 ---
 
 - name: Check if postgres service is running
-  shell: docker service ls | awk '{print $2}' | grep postgres
+  shell: docker service ls | awk '{print $2}' | grep -v postgres9 | grep postgres
   changed_when: false
   register: postgres_status
   failed_when: postgres_status.rc == 2
 
+- name: Create volume directory for postgres
+  hosts: nfs-server[0]
+  become: yes
+  file:
+    path: /srv/nfs/postgres
+    state: directory
+    mode: 0777
+  when: postgres_status.rc == 1
 
-- name: Create volume directory
+- name: Create volume directory for postgres
   hosts: nfs-server[0]
   become: yes
   file:
     path: /srv/nfs/postgres/pgdata
     state: directory
-    mode: 777
+    mode: 0777
   when: postgres_status.rc == 1
+
 
 - name: Deploy postgresql service
   hosts: docker-manager
-  shell: docker service create -d --name postgres --network mangonet --mount type=bind,src=/srv/docker-volumes/postgres/pgdata,dst=/var/lib/postgresql/data --env PGDATA=/var/lib/postgresql/data/pgdata --replicas 1 registry.sysmango.net:5000/postgres:latest
+  shell: |
+    docker service create -d \
+    --name postgres \
+    --network mangonet \
+    --mount type=bind,src=/srv/docker-volumes/postgres/pgdata,dst=/var/lib/postgresql/data \
+    --env PGDATA=/var/lib/postgresql/data/pgdata \
+    --env POSTGRES_PASSWORD=dbadmin \
+    --replicas 1 \
+    registry.sysmango.net:5000/postgres:latest
   when: postgres_status.rc == 1
+
+- name: Register postgres name with Route53
+  connection: local
+  route53:
+    state: present
+    zone: sysmango.net
+    record: postgres.sysmango.net
+    type: CNAME
+    value: grid011.sysmango.net
+    overwrite: yes
+    wait: yes
+
+# - name: Check if mysql service is running
+#   shell: docker service ls | awk '{print $2}' | grep mysql
+#   changed_when: false
+#   register: mysql_status
+#   failed_when: mysql_status.rc == 2
+
+# - name: Create volume directory for mysql
+#   hosts: nfs-server[0]
+#   become: yes
+#   file:
+#     path: /srv/nfs/mysql
+#     state: directory
+#     mode: 0777
+#   when: mysql_status.rc == 1
+
+# - name: Create volume directory for mysql
+#   hosts: nfs-server[0]
+#   become: yes
+#   file:
+#     path: /srv/nfs/mysql/data
+#     state: directory
+#     mode: 0777
+#   when: mysql_status.rc == 1
+
+
+# - name: Deploy mysql service
+#   hosts: docker-manager
+#   shell: |
+#     docker service create -d \
+#     --name mysql \
+#     --network mangonet \
+#     --mount type=bind,src=/srv/docker-volumes/mysql/data,dst=/var/lib/mysql \
+#     --replicas 1 \
+#     --env MYSQL_ROOT_PASSWORD=dbadmin \
+#     --env MYSQL_USER=seafile \
+#     --env MYSQL_USER=seafileadmin \
+#     --env MYSQL_DATABASE=seafile \
+#     mariadb
+#   when: mysql_status.rc == 1

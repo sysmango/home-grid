@@ -13,7 +13,7 @@
   file:
     path: /srv/nfs/jira
     state: directory
-    mode: 777
+    mode: 0777
   any_errors_fatal: true
   when: jira_status.rc == 1
 
@@ -23,7 +23,7 @@
   file:
     path: /srv/nfs/jira/data
     state: directory
-    mode: 777
+    mode: 0777
   any_errors_fatal: true
   when: jira_status.rc == 1
 
@@ -33,7 +33,7 @@
   file:
     path: /srv/nfs/jira/logs
     state: directory
-    mode: 777
+    mode: 0777
   any_errors_fatal: true
   when: jira_status.rc == 1
 
