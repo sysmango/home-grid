@@ -15,3 +15,10 @@
     fstype: nfs
     opts: rw
     state: mounted
+
+- name: Make sure NFS mounts will mount on startup
+  become: yes
+  service: 
+    name: nfs
+    state: started
+    enabled: yes
