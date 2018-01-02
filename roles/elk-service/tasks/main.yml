@@ -127,25 +127,25 @@
   when: logstash_status.rc == 1
 
 
-- name: Deploy logstash service
-  hosts: docker-manager
-  shell: |
-    docker service create -d \
-    --name logstash \
-    --network mangonet \
-    --publish 5044:5044 --publish 9600:9600 \
-    --mount type=bind,src=/srv/docker-volumes/elk/logstash/pipeline/,dst=/usr/share/logstash/pipeline/ \
-    --replicas 1 \
-    docker.elastic.co/logstash/logstash-oss:6.1.1
-  when: logstash_status.rc == 1
+# - name: Deploy logstash service
+#   hosts: docker-manager
+#   shell: |
+#     docker service create -d \
+#     --name logstash \
+#     --network mangonet \
+#     --publish 5044:5044 --publish 9600:9600 \
+#     --mount type=bind,src=/srv/docker-volumes/elk/logstash/pipeline/,dst=/usr/share/logstash/pipeline/ \
+#     --replicas 1 \
+#     docker.elastic.co/logstash/logstash-oss:6.1.1
+#   when: logstash_status.rc == 1
 
-- name: Register logstash name with Route53
-  connection: local
-  route53:
-    state: present
-    zone: sysmango.net
-    record: logstash.sysmango.net
-    type: CNAME
-    value: grid011.sysmango.net
-    overwrite: yes
-    wait: yes
+# - name: Register logstash name with Route53
+#   connection: local
+#   route53:
+#     state: present
+#     zone: sysmango.net
+#     record: logstash.sysmango.net
+#     type: CNAME
+#     value: grid011.sysmango.net
+#     overwrite: yes
+#     wait: yes
