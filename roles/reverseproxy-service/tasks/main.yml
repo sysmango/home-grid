@@ -9,6 +9,12 @@
 
 - name: Deploy reverseproxy service
   hosts: docker-manager[0]
-  shell: docker service create --name reverseproxy --network mangonet --publish 80:80 registry.sysmango.net:5000/reverseproxy
+  shell: |
+    docker service create \
+    --name reverseproxy \
+    --network mangonet \
+    --publish 80:80 \
+    --mode global \
+    registry.sysmango.net:5000/reverseproxy
   run_once: true
   when: reverseproxy_status.rc == 1

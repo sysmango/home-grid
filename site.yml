@@ -47,24 +47,16 @@
   roles:
   - nfs-server
 
-# - name: Setup NFS clients
-#   hosts: all
-#   become: yes
-#   gather_facts: no
-#   roles:
-#   - nfs-client
+- name: Setup NFS clients
+  hosts: all
+  become: yes
+  gather_facts: no
+  roles:
+  - nfs-client
 
 - name: Setup Swarm overlay network
   hosts: docker-manager
   roles:
   - mangonet
 
-- name: Deploy SMTP service to swarm
-  hosts: docker-manager
-  gather_facts: no
-  ignore_errors: yes
-  roles:
-  - registry-service
-  - smtp-service
-  - database-service
-  - jenkins-service
+- import_playbook: docker-services.yml
