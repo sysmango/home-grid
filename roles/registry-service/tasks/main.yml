@@ -11,15 +11,11 @@
   copy: 
     src: daemon.json
     dest: /etc/docker/daemon.json
+  notify: restart docker
 
 - name: Deploy insecure docker registry service
   hosts: docker-manager
   shell: |
-    docker service create -d \
-    --name registry \
-    --network mangonet \
-    --mount type=bind,src=/srv/docker-volumes/registry,dst=/var/lib/registry \
-    --publish 5000:5000 \
-    --replicas 1 \
-    registry:2
+    docker service create -d --name registry --network mangonet --mount type=bind,src=/srv/docker-volumes/registry,dst=/var/lib/registry --publish 5000:5000 --env REGISTRY_HTTP_SECRET=14aff6229ebd9c59496fe203cf20e23868266e9bc11e114ad22bd82486035e37 --replicas 1 registry:2
   when: registry_status.rc == 1
+

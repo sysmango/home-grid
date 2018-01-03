@@ -44,7 +44,7 @@
     zone: sysmango.net
     record: elastic.sysmango.net
     type: CNAME
-    value: grid011.sysmango.net
+    value: grid111.sysmango.net
     overwrite: yes
     wait: yes
 
@@ -98,7 +98,7 @@
     zone: sysmango.net
     record: kibana.sysmango.net
     type: CNAME
-    value: grid011.sysmango.net
+    value: grid111.sysmango.net
     overwrite: yes
     wait: yes
 
@@ -146,6 +146,6 @@
 #     zone: sysmango.net
 #     record: logstash.sysmango.net
 #     type: CNAME
-#     value: grid011.sysmango.net
+#     value: grid111.sysmango.net
 #     overwrite: yes
 #     wait: yes

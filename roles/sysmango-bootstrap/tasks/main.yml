@@ -36,10 +36,10 @@
     line: HandleLidSwitchDocked=ignore
     state: present
 
-- name: Perform zypper dist-upgrade to upgrade to latest Tumbleweed snapshot
-  zypper: name=* state=dist-upgrade
-  notify: 
-  - reboot linux
+# - name: Perform zypper dist-upgrade to upgrade to latest Tumbleweed snapshot
+#   zypper: name=* state=dist-upgrade
+#   notify: 
+#   - reboot linux
 
 - name: Add python2-boto 
   zypper: 

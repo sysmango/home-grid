@@ -23,7 +23,7 @@
 - name: Export test nfs directory for testing
   lineinfile:
     path: /etc/exports
-    line: /srv/nfs/test *(rw)
+    line: /srv/nfs *(rw,no_root_squash)
 
 - name: Enable and start NFS server
   service:

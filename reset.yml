@@ -5,6 +5,6 @@
   become: yes
   tasks:
   - name: Initiate server rollback 
-    shell: snapper rollback 2
+    shell: snapper rollback 4
     notify:
     - reboot linux
