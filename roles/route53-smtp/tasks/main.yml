@@ -5,8 +5,8 @@
     state: present
     zone: sysmango.net
     record: smtp.sysmango.net
-    type: CNAME
-    value: grid111.sysmango.net
+    type: A
+    value: 192.168.1.143,192.168.1.224,192.168.1.202
     overwrite: yes
     wait: yes
 
@@ -16,8 +16,8 @@
     state: present
     zone: sysmango.net
     record: registry.sysmango.net
-    type: CNAME
-    value: grid111.sysmango.net
+    type: A
+    value: 192.168.1.143,192.168.1.224,192.168.1.202
     overwrite: yes
     wait: yes
 
@@ -26,8 +26,8 @@
     state: present
     zone: sysmango.net
     record: jenkins.sysmango.net
-    type: CNAME
-    value: grid111.sysmango.net
+    type: A
+    value: 192.168.1.143,192.168.1.224,192.168.1.202
     overwrite: yes
     wait: yes
 
@@ -36,7 +36,7 @@
     state: present
     zone: sysmango.net
     record: jira.sysmango.net
-    type: CNAME
-    value: grid111.sysmango.net
+    type: A
+    value: 192.168.1.143,192.168.1.224,192.168.1.202
     overwrite: yes
     wait: yes

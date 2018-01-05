@@ -43,8 +43,8 @@
     state: present
     zone: sysmango.net
     record: elastic.sysmango.net
-    type: CNAME
-    value: grid111.sysmango.net
+    type: A
+    value: 192.168.1.143,192.168.1.224,192.168.1.202
     overwrite: yes
     wait: yes
 
@@ -97,8 +97,8 @@
     state: present
     zone: sysmango.net
     record: kibana.sysmango.net
-    type: CNAME
-    value: grid111.sysmango.net
+    type: A
+    value: 192.168.1.143,192.168.1.224,192.168.1.202
     overwrite: yes
     wait: yes
 
@@ -145,7 +145,7 @@
 #     state: present
 #     zone: sysmango.net
 #     record: logstash.sysmango.net
-#     type: CNAME
-#     value: grid111.sysmango.net
+#     type: A
+#     value: 192.168.1.143,192.168.1.224,192.168.1.202
 #     overwrite: yes
 #     wait: yes
