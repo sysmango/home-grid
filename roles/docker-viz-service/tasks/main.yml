@@ -1,0 +1,18 @@
+---
+
+- name: Check if Docker Visualizer service is running 
+  shell: docker service ls | awk '{print $2}' | grep -v vis
+  changed_when: false
+  register: viz_status
+  failed_when: viz_status.rc == 2
+
+- name: Deploy Docker Visualizer service
+  hosts: docker-manager
+  shell: |
+    docker service create \
+    --name=viz \
+    --publish=8080:8080/tcp \
+    --constraint=node.role==manager \
+    --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+    dockersamples/visualizer
+  when: viz_status.rc == 1
