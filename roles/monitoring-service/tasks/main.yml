@@ -53,9 +53,9 @@
     docker service create -d \
     --name nagios4  \
     --network mangonet \
-    --mount type=bind,source=/srv/docker-volumes/nagios/etc/:/opt/nagios/etc/ \
-    --mount type=bind,source=/srv/docker-volumes/nagios/var:/opt/nagios/var/ \
-    --mount type=bind,source=/srv/docker-volumes/nagios/custom-plugins:/opt/Custom-Nagios-Plugins \
+    --mount type=bind,source=/srv/docker-volumes/nagios/etc/,target=/opt/nagios/etc/ \
+    --mount type=bind,source=/srv/docker-volumes/nagios/var,target=/opt/nagios/var/ \
+    --mount type=bind,source=/srv/docker-volumes/nagios/custom-plugins,target=/opt/Custom-Nagios-Plugins \
     jasonrivers/nagios:latest
   run_once: true
   when: nagios_status.rc == 1
