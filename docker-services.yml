@@ -17,4 +17,5 @@
   - jenkins-service
   - redis-service
   # - owncloud-service
+  - monitoring-service
   - reverseproxy-service
