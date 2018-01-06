@@ -50,12 +50,10 @@
 - name: Deploy nagios service
   hosts: docker-manager[0]
   shell: |
-    docker service create -d \
-    --name nagios4  \
+    docker service create -d --name nagios  \
     --network mangonet \
     --mount type=bind,source=/srv/docker-volumes/nagios/etc/,target=/opt/nagios/etc/ \
     --mount type=bind,source=/srv/docker-volumes/nagios/var,target=/opt/nagios/var/ \
     --mount type=bind,source=/srv/docker-volumes/nagios/custom-plugins,target=/opt/Custom-Nagios-Plugins \
     jasonrivers/nagios:latest
-  run_once: true
-  when: nagios_status.rc == 1
+  when: nagios_status == 1  

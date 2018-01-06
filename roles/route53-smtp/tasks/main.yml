@@ -10,7 +10,6 @@
     overwrite: yes
     wait: yes
 
-
 - name: Register registry name with Route53
   route53:
     state: present
