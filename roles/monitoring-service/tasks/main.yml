@@ -56,4 +56,5 @@
     --mount type=bind,source=/srv/docker-volumes/nagios/var,target=/opt/nagios/var/ \
     --mount type=bind,source=/srv/docker-volumes/nagios/custom-plugins,target=/opt/Custom-Nagios-Plugins \
     jasonrivers/nagios:latest
-  when: nagios_status == 1  
+  run_once: true
+  when: nagios_status.rc == 1
