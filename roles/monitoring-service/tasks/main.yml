@@ -1,0 +1,61 @@
+---
+
+- name: Check if nagios service is running
+  shell: docker service ls | awk '{print $2}' | grep nagios
+  changed_when: false
+  ignore_errors: true
+  failed_when: nagios_status.rc == 2
+  register: nagios_status 
+
+- name: Create nagios volume directory
+  hosts: nfs-server[0]
+  become: yes
+  file:
+    path: /srv/nfs/nagios
+    mode: 0777
+    state: directory
+  run_once: true
+  when: nagios_status.rc == 1
+  
+- name: Create nagios local config directory etc
+  hosts: nfs-server[0]
+  become: yes
+  file:
+    path: /srv/nfs/nagios/etc
+    mode: 0777
+    state: directory
+  run_once: true
+  when: nagios_status.rc == 1
+
+- name: Create nagios local config directory var
+  hosts: nfs-server[0]
+  become: yes
+  file:
+    path: /srv/nfs/nagios/var
+    mode: 0777
+    state: directory
+  run_once: true
+  when: nagios_status.rc == 1
+
+- name: Create nagios local config directory custom
+  hosts: nfs-server[0]
+  become: yes
+  file:
+    path: /srv/nfs/nagios/custom-plugins
+    mode: 0777
+    state: directory
+  run_once: true
+  when: nagios_status.rc == 1
+
+- name: Deploy nagios service
+  hosts: docker-manager[0]
+  shell: |
+    docker service create -d \
+    --name nagios4  \
+    --network mangonet 
+    --mount type=bind,source=/srv/docker-volumes/nagios/etc/:/opt/nagios/etc/ \
+    --mount type=bind,source=/srv/docker-volumes/nagios/var:/opt/nagios/var/ \
+    --mount type=bind,source=/srv/docker-volumes/nagios/custom-plugins:/opt/Custom-Nagios-Plugins \
+    jasonrivers/nagios:latest
+  run_once: true
+  when: nagios_status.rc == 1
