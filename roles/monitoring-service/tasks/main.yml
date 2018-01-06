@@ -52,7 +52,7 @@
   shell: |
     docker service create -d \
     --name nagios4  \
-    --network mangonet 
+    --network mangonet \
     --mount type=bind,source=/srv/docker-volumes/nagios/etc/:/opt/nagios/etc/ \
     --mount type=bind,source=/srv/docker-volumes/nagios/var:/opt/nagios/var/ \
     --mount type=bind,source=/srv/docker-volumes/nagios/custom-plugins:/opt/Custom-Nagios-Plugins \
