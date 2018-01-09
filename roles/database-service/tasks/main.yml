@@ -46,7 +46,7 @@
     zone: sysmango.net
     record: postgres.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.202
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: yes
     wait: yes
 

@@ -39,6 +39,12 @@
 
 - name: Deploy jira service
   hosts: docker-manager[0]
-  shell: docker service create -d --name jira --network mangonet --mount type=bind,src=/srv/docker-volumes/jira/data,dst=/var/atlassian/jira --mount type=bind,src=/srv/docker-volumes/jira/logs,dst=/opt/atlassian/jira/logs --replicas 1 registry.sysmango.net:5000/jira
+  shell: |
+    docker service create -d --name jira \ 
+    --network mangonet \
+    --mount type=bind,src=/srv/docker-volumes/jira/data,dst=/var/atlassian/jira \
+    --mount type=bind,src=/srv/docker-volumes/jira/logs,dst=/opt/atlassian/jira/logs \
+    --replicas 1 \
+    registry.sysmango.net:5000/jira
   run_once: true
   when: jira_status.rc == 1
