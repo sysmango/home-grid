@@ -88,7 +88,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               k: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/jenkins-service/*/*.yml"
@@ -96,7 +96,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               l: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/jira-service/*/*.yml"
@@ -104,7 +104,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               m: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/mangonet/*/*.yml"
@@ -112,7 +112,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               n: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/monitoring-service/*/*.yml"
@@ -120,7 +120,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               o: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/nexus-service-service/*/*.yml"
@@ -128,7 +128,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               p: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/nfs-client/*/*.yml"
@@ -136,7 +136,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               q: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/nfs-server/*/*.yml"
@@ -144,7 +144,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               r: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/redis-service/*/*.yml"
@@ -152,7 +152,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               s: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/reverseproxy-service/*/*.yml"
@@ -160,7 +160,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               t: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/route53-smtp/*/*.yml"
@@ -168,7 +168,7 @@ pipeline {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               u: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/sysmango-bootstrap/*/*.yml"
@@ -177,9 +177,9 @@ pipeline {
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
                               }
-                      )
-                  }                  
-                }
+                              )
+                        }                  
+                 }
             }
             stage('Ansible Lint') {
                                 steps{ 
