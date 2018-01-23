@@ -265,7 +265,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               k: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/jenkins-service/*/*.yml"
@@ -273,7 +273,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               l: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/jira-service/*/*.yml"
@@ -281,7 +281,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               m: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/mangonet/*/*.yml"
@@ -289,7 +289,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               n: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/monitoring-service/*/*.yml"
@@ -297,7 +297,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               o: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/nexus-service-service/*/*.yml"
@@ -305,7 +305,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               p: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/nfs-client/*/*.yml"
@@ -313,7 +313,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               q: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/nfs-server/*/*.yml"
@@ -321,7 +321,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               r: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/redis-service/*/*.yml"
@@ -329,7 +329,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               s: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/reverseproxy-service/*/*.yml"
@@ -337,7 +337,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               t: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/route53-smtp/*/*.yml"
@@ -345,7 +345,7 @@ pipeline {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
-                              }
+                              },
                               u: {      
                                     try{                        
                                           sh "ansible-lint -c jenkins/ansible-lint_config roles/sysmango-bootstrap/*/*.yml"
