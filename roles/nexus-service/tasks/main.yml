@@ -29,6 +29,7 @@
     docker service create -d \
     --name nexus --network mangonet \
     --publish 8081:8081 \
+    --publish 5000:5000 \
     --mount type=bind,src=/srv/docker-volumes/nexus,dst=/nexus-data \
     --replicas 1 \
     sonatype/nexus3

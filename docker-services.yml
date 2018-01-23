@@ -11,7 +11,7 @@
   hosts: docker-manager[0]
   roles:
   - registry-service
-  - nexus-service
+  # - nexus-service
   - smtp-service
   - elk-service
   - database-service
