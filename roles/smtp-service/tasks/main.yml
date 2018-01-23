@@ -1,13 +1,13 @@
 ---
 
 - name: Check if SMTP service is running
-  shell: docker service ls | awk '{print $2}' | grep smtp
+  command: docker service ls | awk '{print $2}' | grep smtp
   changed_when: false
   ignore_errors: true
   register: smtp_status
-  failed_when: smtp_status.rc == 2 
+  failed_when: smtp_status.rc == 2
 
 - name: Deploy smtp service
   hosts: docker-manager[0]
-  shell: docker service create --name smtp --network mangonet -e SYSTEM_TIMEZONE=America/New_York -e EMAIL=bostch@gmail.com -e EMAILPASS=awtusdlwnfexuujn -e MYNETWORKS="10.0.0.0/8 192.168.0.0/16 172.0.0.0/8" --publish 587:25  lylescott/postfix-gmail-relay 
+  command: docker service create --name smtp --network mangonet -e SYSTEM_TIMEZONE=America/New_York -e EMAIL=bostch@gmail.com -e EMAILPASS=awtusdlwnfexuujn -e MYNETWORKS="10.0.0.0/8 192.168.0.0/16 172.0.0.0/8" --publish 587:25  lylescott/postfix-gmail-relay 
   when: smtp_status.rc == 1

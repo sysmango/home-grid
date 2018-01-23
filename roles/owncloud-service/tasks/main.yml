@@ -1,7 +1,7 @@
 ---
 
 - name: Check if owncloud service is running
-  shell: docker service ls | awk '{print $2}' | grep owncloud
+  command: docker service ls | awk '{print $2}' | grep owncloud
   changed_when: owncloud_status.rc == 1
   ignore_errors: true
   failed_when: owncloud_status.rc == 2
@@ -60,7 +60,7 @@
 
 - name: Deploy owncloud service
   hosts: docker-manager[0]
-  shell: | 
+  command: | 
     docker service create -d --name owncloud \
     --network mangonet \
     --mount type=bind,src=/srv/docker-volumes/owncloud/data,dst=/mnt/data \

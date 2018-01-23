@@ -3,7 +3,7 @@
 - name: Setup local non-root user
   user:
     name: butch
-    shell: /bin/bash
+    command: /bin/bash
 
 - name: Set authorized key took from url
   authorized_key:
@@ -38,7 +38,7 @@
 
 # - name: Perform zypper dist-upgrade to upgrade to latest Tumbleweed snapshot
 #   zypper: name=* state=dist-upgrade
-#   notify: 
+#   notify:
 #   - reboot linux
 
 - name: Add python2-boto

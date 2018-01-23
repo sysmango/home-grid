@@ -1,8 +1,8 @@
 ---
 
 - name: Install NFS server components
-  zypper: 
-    name: "{{ item }}" 
+  zypper:
+    name: "{{ item }}"
     state: present
   with_items:
   - "nfs-kernel-server"
@@ -30,4 +30,3 @@
     name: nfsserver
     state: started
     enabled: yes
-

@@ -12,7 +12,7 @@
     line: FLANNEL_ETCD_KEY="/sysmango/swarm/network"
 
 - name: Configure flannel /sysmango/swarm/network/config
-  shell: etcdctl set /sysmango/swarm/network/config '{"Network":"172.16.0.0/16","SubnetLen":20, "Backend":{ "Type":"vxlan","Port":7890}}'
+  command: etcdctl set /sysmango/swarm/network/config '{"Network":"172.16.0.0/16","SubnetLen":20, "Backend":{ "Type":"vxlan","Port":7890}}'
 
 - name: Enable and start flanneld
   service:

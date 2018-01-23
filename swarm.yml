@@ -7,7 +7,7 @@
   become: true
   tasks:
     - name: determine swarm status
-      shell: >
+      command: >
         docker info | egrep '^Swarm: ' | cut -d ' ' -f2
       register: swarm_status
 
@@ -35,7 +35,7 @@
   become: true
   tasks:
     - name: determine swarm status
-      shell: >
+      command: >
         docker info | egrep '^Swarm: ' | cut -d ' ' -f2
       register: swarm_status
 
@@ -62,7 +62,7 @@
   become: true
   tasks:
     - name: initialize swarm cluster
-      shell: >
+      command: >
         docker swarm init
         --advertise-addr={{ swarm_iface | default('eth0') }}:2377
       when: "'swarm_manager_operational' not in groups"
@@ -83,11 +83,11 @@
     iface: "{{ swarm_iface | default('eth0') }}"
   tasks:
     - name: retrieve swarm manager token
-      shell: docker swarm join-token -q manager
+      command: docker swarm join-token -q manager
       register: swarm_manager_token
 
     - name: retrieve swarm worker token
-      shell: docker swarm join-token -q worker
+      command: docker swarm join-token -q worker
       register: swarm_worker_token
 
     - name: populate list of manager ips
@@ -103,7 +103,7 @@
     token: "{{ hostvars[groups['swarm_manager_operational'][0]]['swarm_manager_token']['stdout'] }}"
   tasks:
     - name: join manager nodes to cluster
-      shell: >
+      command: >
         docker swarm join
         --advertise-addr={{ swarm_iface | default('eth0') }}:2377
         --token={{ token }}
@@ -116,7 +116,7 @@
     token: "{{ hostvars[groups['swarm_manager_operational'][0]]['swarm_worker_token']['stdout'] }}"
   tasks:
     - name: join worker nodes to cluster
-      shell: >
+      command: >
         docker swarm join
         --advertise-addr={{ swarm_iface | default('eth0') }}:2377
         --token={{ token }}

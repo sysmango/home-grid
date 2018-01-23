@@ -1,11 +1,11 @@
 ---
 
 - name: Check if Jenkins service is running
-  shell: docker service ls | awk '{print $2}' | grep jenkins
+  command: docker service ls | awk '{print $2}' | grep jenkins
   changed_when: false
   ignore_errors: true
   failed_when: jenkins_status.rc == 2
-  register: jenkins_status 
+  register: jenkins_status
 
 - name: Create jenkins volume directory
   hosts: nfs-server[0]
@@ -16,7 +16,7 @@
     state: directory
   run_once: true
   when: jenkins_status.rc == 1
-  
+
 - name: Create jenkins local config directory sysmango
   hosts: nfs-server[0]
   become: yes
@@ -35,7 +35,7 @@
 
 - name: Deploy jenkins service
   hosts: docker-manager[0]
-  shell: |
+  command: |
     docker service create -d --name jenkins \
     --network mangonet \
     --mount type=bind,src=/srv/docker-volumes/jenkins,dst=/var/jenkins_home \

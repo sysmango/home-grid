@@ -1,7 +1,7 @@
 ---
 
 - name: Check if Sonatype Nexus service is running
-  shell: docker service ls | awk '{print $2}' | grep nexus
+  command: docker service ls | awk '{print $2}' | grep nexus
   changed_when: false
   register: nexus_status
   failed_when: nexus_status.rc == 2
@@ -25,7 +25,7 @@
 
 - name: Deploy docker nexus service
   hosts: docker-manager
-  shell: |
+  command: |
     docker service create -d \
     --name nexus --network mangonet \
     --publish 8081:8081 \

@@ -1,7 +1,7 @@
 ---
 
 - name: Check if elasticsearch service is running
-  shell: docker service ls | awk '{print $2}' | grep elasticsearch
+  command: docker service ls | awk '{print $2}' | grep elasticsearch
   changed_when: false
   register: elastic_status
   failed_when: elastic_status.rc == 2
@@ -27,7 +27,7 @@
 
 - name: Deploy elasticsearch service
   hosts: docker-manager
-  shell: |
+  command: |
     docker service create -d \
     --name elasticsearch \
     --network mangonet \
@@ -35,7 +35,7 @@
     --replicas 1 \
     --publish 9200:9200 --publish 9300:9300 -e "discovery.type=single-node" \
     docker.elastic.co/elasticsearch/elasticsearch:6.1.2
-  when: elastic_status.rc == 1  
+  when: elastic_status.rc == 1
 
 - name: Register elastic name with Route53
   connection: local
@@ -49,7 +49,7 @@
     wait: yes
 
 - name: Check if kibana service is running
-  shell: docker service ls | awk '{print $2}' | grep kibana
+  command: docker service ls | awk '{print $2}' | grep kibana
   changed_when: false
   register: kibana_status
   failed_when: kibana_status.rc == 2
@@ -75,7 +75,7 @@
 
 - name: Deploy kibana service
   hosts: docker-manager
-  shell: |
+  command: |
     docker service create -d \
     --name kibana \
     --network mangonet \
@@ -101,7 +101,7 @@
     wait: yes
 
 - name: Check if logstash service is running
-  shell: docker service ls | awk '{print $2}' | grep logstash
+  command: docker service ls | awk '{print $2}' | grep logstash
   changed_when: false
   register: logstash_status
   failed_when: logstash_status.rc == 2
@@ -127,7 +127,7 @@
 
 - name: Deploy logstash service
   hosts: docker-manager
-  shell: |
+  command: |
     docker service create -d \
     --name logstash \
     --network mangonet \
@@ -150,14 +150,14 @@
     wait: yes
 
 - name: Check if dockbeat service is running
-  shell: docker service ls | awk '{print $2}' | grep dockbeat
+  command: docker service ls | awk '{print $2}' | grep dockbeat
   changed_when: false
   register: dockbeat_status
   failed_when: dockbeat_status.rc == 2
 
 - name: Deploy dockbeat service
   hosts: docker-manager
-  shell: |
+  command: |
     docker service create -d \
     --name dockbeat \
     --network mangonet \

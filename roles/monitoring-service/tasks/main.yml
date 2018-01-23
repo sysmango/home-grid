@@ -1,11 +1,11 @@
 ---
 
 - name: Check if nagios service is running
-  shell: docker service ls | awk '{print $2}' | grep nagios
+  command: docker service ls | awk '{print $2}' | grep nagios
   changed_when: false
   ignore_errors: true
   failed_when: nagios_status.rc == 2
-  register: nagios_status 
+  register: nagios_status
 
 - name: Create nagios volume directory
   hosts: nfs-server[0]
@@ -16,7 +16,7 @@
     state: directory
   run_once: true
   when: nagios_status.rc == 1
-  
+
 - name: Create nagios local config directory etc
   hosts: nfs-server[0]
   become: yes
@@ -49,7 +49,7 @@
 
 - name: Deploy nagios service
   hosts: docker-manager[0]
-  shell: |
+  command: |
     docker service create -d --name nagios  \
     --network mangonet \
     --mount type=bind,source=/srv/docker-volumes/nagios/etc/,target=/opt/nagios/etc/ \

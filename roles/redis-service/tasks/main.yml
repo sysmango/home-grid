@@ -1,11 +1,11 @@
 ---
 
 - name: Check if redis service is running
-  shell: docker service ls | awk '{print $2}' | grep redis
+  command: docker service ls | awk '{print $2}' | grep redis
   changed_when: false
   ignore_errors: true
   failed_when: redis_status.rc == 2
-  register: redis_status 
+  register: redis_status
 
 - name: Create redis volume directory
   hosts: nfs-server[0]
@@ -29,7 +29,7 @@
 
 - name: Deploy redis service
   hosts: docker-manager[0]
-  shell: |
+  command: |
     docker service create -d --name redis \
     --network mangonet \
     --mount type=bind,src=/srv/docker-volumes/redis/data,dst=/data \
