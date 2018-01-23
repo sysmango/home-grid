@@ -1,5 +1,5 @@
 pipeline {
-      agent { dockerfile true } 
+      agent { label 'espresso' } 
 
       stages{
             /* tests for ansible scripts */
