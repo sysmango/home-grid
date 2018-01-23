@@ -52,7 +52,7 @@
       run_once: true
 
 # when the swarm_manager_operational group is empty, meaning there
-# are no hosts running swarm, we need to initialize one of the hosts
+# are "no" hosts running swarm, we need to initialize one of the hosts
 # then add it to the swarm_manager_operational group
 - hosts: swarm_manager_bootstrap[0]
   become: true

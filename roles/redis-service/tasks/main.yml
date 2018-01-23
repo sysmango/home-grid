@@ -9,7 +9,7 @@
 
 - name: Create redis volume directory
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/redis
     mode: 0777
@@ -19,7 +19,7 @@
 
 - name: Create redis volume directory
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/redis/data
     mode: 0777

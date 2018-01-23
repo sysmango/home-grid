@@ -48,12 +48,12 @@
 
 - name: Add route53 entries
   connection: local
-  become: no
+  become: "no"
   route53:
     state: present
     zone: sysmango.net
     record: "{{ inventory_hostname}}.sysmango.net"
     type: A
     value: "{{ ansible_default_ipv4.address }}"
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"

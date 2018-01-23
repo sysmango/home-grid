@@ -9,7 +9,7 @@
 
 - name: Create jira volume root directory
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/jira
     state: directory
@@ -19,7 +19,7 @@
 
 - name: Create jira volume data directory
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/jira/data
     state: directory
@@ -29,7 +29,7 @@
 
 - name: Create jira volume logs directory
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/jira/logs
     state: directory

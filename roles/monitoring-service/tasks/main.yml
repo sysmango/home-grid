@@ -9,7 +9,7 @@
 
 - name: Create nagios volume directory
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/nagios
     mode: 0777
@@ -19,7 +19,7 @@
 
 - name: Create nagios local config directory etc
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/nagios/etc
     mode: 0777
@@ -29,7 +29,7 @@
 
 - name: Create nagios local config directory var
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/nagios/var
     mode: 0777
@@ -39,7 +39,7 @@
 
 - name: Create nagios local config directory custom
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/nagios/custom-plugins
     mode: 0777

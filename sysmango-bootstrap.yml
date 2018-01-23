@@ -1,8 +1,9 @@
 ---
+
 - name: Bootstrap new sysmango nodes.
-  become: yes
-  gather_facts: no
+  become: "yes"
+  gather_facts: "no"
   hosts:
     - all
   roles:
-          - sysmango-bootstrap
+    - sysmango-bootstrap

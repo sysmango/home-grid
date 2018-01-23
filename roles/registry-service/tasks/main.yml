@@ -7,7 +7,7 @@
   failed_when: registry_status.rc == 2
 
 - name: setup daemon.json
-  become: yes
+  become: "yes"
   copy:
     src: daemon.json
     dest: /etc/docker/daemon.json

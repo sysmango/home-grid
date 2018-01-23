@@ -8,7 +8,7 @@
 
 - name: Create volume directory for postgres
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/postgres
     state: directory
@@ -17,7 +17,7 @@
 
 - name: Create volume directory for postgres
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/postgres/pgdata
     state: directory
@@ -46,8 +46,8 @@
     record: postgres.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.200
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 # - name: Check if mysql service is running
 #   command: docker service ls | awk '{print $2}' | grep mysql
@@ -57,7 +57,7 @@
 
 # - name: Create volume directory for mysql
 #   hosts: nfs-server[0]
-#   become: yes
+#   become: "yes"
 #   file:
 #     path: /srv/nfs/mysql
 #     state: directory
@@ -66,7 +66,7 @@
 
 # - name: Create volume directory for mysql
 #   hosts: nfs-server[0]
-#   become: yes
+#   become: "yes"
 #   file:
 #     path: /srv/nfs/mysql/data
 #     state: directory

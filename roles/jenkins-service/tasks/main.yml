@@ -9,7 +9,7 @@
 
 - name: Create jenkins volume directory
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/jenkins
     mode: 0777
@@ -19,7 +19,7 @@
 
 - name: Create jenkins local config directory sysmango
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/jenkins/sysmango
     mode: 0777

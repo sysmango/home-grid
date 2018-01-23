@@ -8,7 +8,7 @@
 
 - name: Create volume directory for elk
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk
     state: directory
@@ -17,7 +17,7 @@
 
 - name: Create volume directory for elasticsearch
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk/elasticsearch
     state: directory
@@ -45,8 +45,8 @@
     record: elastic.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.200
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Check if kibana service is running
   command: docker service ls | awk '{print $2}' | grep kibana
@@ -56,7 +56,7 @@
 
 - name: Create volume directory for kibana
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk/kibana
     state: directory
@@ -65,7 +65,7 @@
 
 - name: Create volume directory for kibana
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk/kibana/data
     state: directory
@@ -97,8 +97,8 @@
     record: kibana.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.200
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Check if logstash service is running
   command: docker service ls | awk '{print $2}' | grep logstash
@@ -108,7 +108,7 @@
 
 - name: Create volume directory for logstash
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk/logstash
     state: directory
@@ -117,7 +117,7 @@
 
 - name: Create volume directory for logstash pipelines
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk/logstash/pipeline
     state: directory
@@ -146,8 +146,8 @@
     record: logstash.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.200
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Check if dockbeat service is running
   command: docker service ls | awk '{print $2}' | grep dockbeat

@@ -7,8 +7,8 @@
     record: smtp.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.201
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Register registry name with Route53
   route53:
@@ -17,8 +17,8 @@
     record: registry.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.201
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Register jenkins name with Route53
   route53:
@@ -27,8 +27,8 @@
     record: jenkins.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.201
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Register jira name with Route53
   route53:
@@ -37,8 +37,8 @@
     record: jira.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.201
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Register nagios name with Route53
   route53:
@@ -47,8 +47,8 @@
     record: nagios.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.201
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Register kibana name with Route53
   route53:
@@ -57,5 +57,5 @@
     record: kibana.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.201
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
