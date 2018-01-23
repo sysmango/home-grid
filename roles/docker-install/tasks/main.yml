@@ -1,17 +1,17 @@
 ---
 
-- name: Install Docker package 
+- name: Install Docker package
   zypper:
     name: docker
     state: present
 
 - name: Add butch to docker
-  user: 
+  user:
     name: butch
     groups: docker
     append: true
 
 - name: Install Docker python client
-  zypper: 
+  zypper:
     name: python-docker
     state: present

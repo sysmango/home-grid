@@ -25,13 +25,13 @@
     validate: 'visudo -cf %s'
 
 - name: Add butch to %wheel
-  user: 
+  user:
     name: butch
     groups: wheel
     append: true
 
 - name: Ignore lid switch
-  lineinfile: 
+  lineinfile:
     path: /etc/systemd/logind.conf
     line: HandleLidSwitchDocked=ignore
     state: present
@@ -41,14 +41,14 @@
 #   notify: 
 #   - reboot linux
 
-- name: Add python2-boto 
-  zypper: 
+- name: Add python2-boto
+  zypper:
     name: python2-boto
     state: present
 
 - name: Add route53 entries
   connection: local
-  become: no 
+  become: no
   route53:
     state: present
     zone: sysmango.net
@@ -57,4 +57,3 @@
     value: "{{ ansible_default_ipv4.address }}"
     overwrite: yes
     wait: yes
-    

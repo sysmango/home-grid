@@ -2,7 +2,7 @@
 
 - name: Setup NFS client mount point for volumes
   become: yes
-  file: 
+  file:
     path: /srv/docker-volumes
     state: directory
     mode: 0777
@@ -18,7 +18,7 @@
 
 - name: Make sure NFS mounts will mount on startup
   become: yes
-  service: 
+  service:
     name: nfs
     state: started
     enabled: yes

@@ -32,7 +32,7 @@
   hosts: all
   become: yes
   tasks:
-  - name: Docker Service 
+  - name: Docker Service
     service:
       name: docker
       state: started
