@@ -75,7 +75,7 @@ pipeline {
                               },
                               i: {      
                                     try{                        
-                                          sh "yamllint -c jenkins/yamllint_config roles/ectd-install/*/*.yml"
+                                          sh "yamllint -c jenkins/yamllint_config roles/etcd-install/*/*.yml"
                                     } catch (err) {
                                           echo "yamllint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -300,7 +300,7 @@ pipeline {
                               },
                               o: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/nexus-service-service/*/*.yml"
+                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/nexus-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'

@@ -5,8 +5,8 @@
     name: "{{ item }}"
     state: present
   with_items:
-  - "nfs-kernel-server"
-  - "yast2-nfs-server"
+    - "nfs-kernel-server"
+    - "yast2-nfs-server"
 
 - name: Create root nfs directory
   file:

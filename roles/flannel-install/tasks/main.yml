@@ -1,6 +1,6 @@
 ---
 
-- name: Install flannel package 
+- name: Install flannel package
   zypper:
     name: flannel
     state: present

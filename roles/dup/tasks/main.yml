@@ -1,7 +1,7 @@
 ---
 
 - name: Perform zypper dist-upgrade to upgrade to latest Tumbleweed snapshot
-      zypper: 
+      zypper:
         name: * 
         state: dist-upgrade
 
