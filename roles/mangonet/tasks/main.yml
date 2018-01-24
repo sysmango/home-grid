@@ -3,7 +3,7 @@
 
 - name: Create mangonet overlay network
   hosts: docker-manager
-  # shell: docker network create --driver overlay mangonet
+  # command: docker network create --driver overlay mangonet
   docker_network:
     name: mangonet
     driver: overlay

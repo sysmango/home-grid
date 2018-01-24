@@ -3,7 +3,7 @@
 - name: Setup local non-root user
   user:
     name: butch
-    shell: /bin/bash
+    command: /bin/bash
 
 - name: Set authorized key took from url
   authorized_key:
@@ -25,36 +25,35 @@
     validate: 'visudo -cf %s'
 
 - name: Add butch to %wheel
-  user: 
+  user:
     name: butch
     groups: wheel
     append: true
 
 - name: Ignore lid switch
-  lineinfile: 
+  lineinfile:
     path: /etc/systemd/logind.conf
     line: HandleLidSwitchDocked=ignore
     state: present
 
 # - name: Perform zypper dist-upgrade to upgrade to latest Tumbleweed snapshot
 #   zypper: name=* state=dist-upgrade
-#   notify: 
+#   notify:
 #   - reboot linux
 
-- name: Add python2-boto 
-  zypper: 
+- name: Add python2-boto
+  zypper:
     name: python2-boto
     state: present
 
 - name: Add route53 entries
   connection: local
-  become: no 
+  become: "no"
   route53:
     state: present
     zone: sysmango.net
     record: "{{ inventory_hostname}}.sysmango.net"
     type: A
     value: "{{ ansible_default_ipv4.address }}"
-    overwrite: yes
-    wait: yes
-    
+    overwrite: "yes"
+    wait: "yes"

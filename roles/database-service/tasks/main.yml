@@ -1,14 +1,14 @@
 ---
 
 - name: Check if postgres service is running
-  shell: docker service ls | awk '{print $2}' | grep -v postgres9 | grep postgres
+  command: docker service ls | awk '{print $2}' | grep -v postgres9 | grep postgres
   changed_when: false
   register: postgres_status
   failed_when: postgres_status.rc == 2
 
 - name: Create volume directory for postgres
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/postgres
     state: directory
@@ -17,17 +17,16 @@
 
 - name: Create volume directory for postgres
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/postgres/pgdata
     state: directory
     mode: 0777
   when: postgres_status.rc == 1
 
-
 - name: Deploy postgresql service
   hosts: docker-manager
-  shell: |
+  command: |
     docker service create -d \
     --name postgres \
     --network mangonet \

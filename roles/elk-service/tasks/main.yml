@@ -1,14 +1,14 @@
 ---
 
 - name: Check if elasticsearch service is running
-  shell: docker service ls | awk '{print $2}' | grep elasticsearch
+  command: docker service ls | awk '{print $2}' | grep elasticsearch
   changed_when: false
   register: elastic_status
   failed_when: elastic_status.rc == 2
 
 - name: Create volume directory for elk
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk
     state: directory
@@ -17,7 +17,7 @@
 
 - name: Create volume directory for elasticsearch
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk/elasticsearch
     state: directory
@@ -27,7 +27,7 @@
 
 - name: Deploy elasticsearch service
   hosts: docker-manager
-  shell: |
+  command: |
     docker service create -d \
     --name elasticsearch \
     --network mangonet \
@@ -35,7 +35,7 @@
     --replicas 1 \
     --publish 9200:9200 --publish 9300:9300 -e "discovery.type=single-node" \
     docker.elastic.co/elasticsearch/elasticsearch:6.1.2
-  when: elastic_status.rc == 1  
+  when: elastic_status.rc == 1
 
 - name: Register elastic name with Route53
   connection: local
@@ -45,18 +45,18 @@
     record: elastic.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.200
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Check if kibana service is running
-  shell: docker service ls | awk '{print $2}' | grep kibana
+  command: docker service ls | awk '{print $2}' | grep kibana
   changed_when: false
   register: kibana_status
   failed_when: kibana_status.rc == 2
 
 - name: Create volume directory for kibana
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk/kibana
     state: directory
@@ -65,7 +65,7 @@
 
 - name: Create volume directory for kibana
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk/kibana/data
     state: directory
@@ -75,7 +75,7 @@
 
 - name: Deploy kibana service
   hosts: docker-manager
-  shell: |
+  command: |
     docker service create -d \
     --name kibana \
     --network mangonet \
@@ -97,18 +97,18 @@
     record: kibana.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.200
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Check if logstash service is running
-  shell: docker service ls | awk '{print $2}' | grep logstash
+  command: docker service ls | awk '{print $2}' | grep logstash
   changed_when: false
   register: logstash_status
   failed_when: logstash_status.rc == 2
 
 - name: Create volume directory for logstash
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk/logstash
     state: directory
@@ -117,7 +117,7 @@
 
 - name: Create volume directory for logstash pipelines
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/elk/logstash/pipeline
     state: directory
@@ -127,7 +127,7 @@
 
 - name: Deploy logstash service
   hosts: docker-manager
-  shell: |
+  command: |
     docker service create -d \
     --name logstash \
     --network mangonet \
@@ -146,18 +146,18 @@
     record: logstash.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.200
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
 
 - name: Check if dockbeat service is running
-  shell: docker service ls | awk '{print $2}' | grep dockbeat
+  command: docker service ls | awk '{print $2}' | grep dockbeat
   changed_when: false
   register: dockbeat_status
   failed_when: dockbeat_status.rc == 2
 
 - name: Deploy dockbeat service
   hosts: docker-manager
-  shell: |
+  command: |
     docker service create -d \
     --name dockbeat \
     --network mangonet \

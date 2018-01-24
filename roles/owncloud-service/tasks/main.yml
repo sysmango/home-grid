@@ -1,7 +1,7 @@
 ---
 
 - name: Check if owncloud service is running
-  shell: docker service ls | awk '{print $2}' | grep owncloud
+  command: docker service ls | awk '{print $2}' | grep owncloud
   changed_when: owncloud_status.rc == 1
   ignore_errors: true
   failed_when: owncloud_status.rc == 2
@@ -9,7 +9,7 @@
 
 - name: Create owncloud volume root directory
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/owncloud
     state: directory
@@ -19,7 +19,7 @@
 
 - name: Create owncloud volume data directory
   hosts: nfs-server[0]
-  become: yes
+  become: "yes"
   file:
     path: /srv/nfs/owncloud/data
     state: directory
@@ -29,7 +29,7 @@
 
 # - name: Create owncloud volume config directory
 #   hosts: nfs-server[0]
-#   become: yes
+#   become: "yes"
 #   file:
 #     path: /srv/nfs/owncloud/config
 #     state: directory
@@ -44,7 +44,7 @@
     login_password: dbadmin
     user: owncloud
     password: 'str[\"md5\"] + md5[ owncloudadmin + owncloud ]'
-    encrypted: yes
+    encrypted: "yes"
     state: present
   when: owncloud_status.rc == 1
 
@@ -60,7 +60,7 @@
 
 - name: Deploy owncloud service
   hosts: docker-manager[0]
-  shell: | 
+  command: | 
     docker service create -d --name owncloud \
     --network mangonet \
     --mount type=bind,src=/srv/docker-volumes/owncloud/data,dst=/mnt/data \
@@ -86,5 +86,5 @@
     record: owncloud.sysmango.net
     type: A
     value: 192.168.1.143,192.168.1.224,192.168.1.200
-    overwrite: yes
-    wait: yes
+    overwrite: "yes"
+    wait: "yes"
