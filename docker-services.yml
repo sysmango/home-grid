@@ -10,8 +10,8 @@
 - name: Deploy docker services
   hosts: docker-manager[0]
   roles:
-  - registry-service
-  # - nexus-service
+  # - registry-service
+  - nexus-service
   - smtp-service
   - elk-service
   - database-service

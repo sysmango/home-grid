@@ -14,7 +14,7 @@ ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379"
 #[cluster]
 ETCD_INITIAL_ADVERTISE_PEER_URLS="http://{{ ansible_default_ipv4["address"]   }}:2380"
 # if you use different ETCD_NAME (e.g. test), set ETCD_INITIAL_CLUSTER value for this name, i.e. "test=http://..."
-ETCD_INITIAL_CLUSTER="grid100=http://192.168.1.224:2380,grid011=http://192.168.1.143:2380,grid111=http://192.168.1.201:2380"
+ETCD_INITIAL_CLUSTER="grid100=http://192.168.1.224:2380,grid011=http://192.168.1.143:2380,grid111=http://192.168.1.202:2380"
 ETCD_INITIAL_CLUSTER_STATE="new"
 #ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
 ETCD_ADVERTISE_CLIENT_URLS="http://{{ ansible_default_ipv4["address"]   }}:2379"

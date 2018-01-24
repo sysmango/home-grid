@@ -2,5 +2,3 @@
   "insecure-registries" : ["registry.sysmango.net:5000","registry:5000","nexus.sysmango.net:5000","nexus:5000"]
 
 }
-
-

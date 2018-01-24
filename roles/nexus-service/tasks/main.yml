@@ -11,7 +11,8 @@
   copy: 
     src: daemon.json
     dest: /etc/docker/daemon.json
-  notify: restart docker
+  when: nexus_status.rc == 1
+  # notify: restart docker
 
 - name: Create nexus volume directory
   hosts: nfs-server[0]
@@ -28,8 +29,8 @@
   shell: |
     docker service create -d \
     --name nexus --network mangonet \
+    --publish 5000:5001 \
     --publish 8081:8081 \
-    --publish 5000:5000 \
     --mount type=bind,src=/srv/docker-volumes/nexus,dst=/nexus-data \
     --replicas 1 \
     sonatype/nexus3
@@ -42,7 +43,12 @@
     zone: sysmango.net
     record: nexus.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.202
     overwrite: yes
     wait: yes
 
+- name: Wait for port 5000  to open so the private registry is accessible 
+  wait_for:
+    host: nexus.sysmango.net
+    port: 5000
+    state: started
