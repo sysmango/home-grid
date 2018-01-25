@@ -35,7 +35,7 @@
     --env PGDATA=/var/lib/postgresql/data \
     --env POSTGRES_PASSWORD=dbadmin \
     --replicas 1 \
-    postgres:latest
+    nexus.sysmango.net/postgres:latest
   when: postgres_status.rc == 1
 
 - name: Register postgres name with Route53
