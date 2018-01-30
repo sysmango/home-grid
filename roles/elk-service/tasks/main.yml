@@ -222,7 +222,7 @@
   hosts: docker-master
   command: |
     docker run \
-    --mount type=bind,src=/srv/docker-volumes/elk/metricbeat/metricbeat.yml,dst=/usr/share/metricbeat/metricbeat.yml \
+    -v /srv/docker-volumes/elk/metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml \
     docker.elastic.co/beats/metricbeat:6.1.3 setup --dashboards
   when: metric_status.rc == 1
 
@@ -232,7 +232,7 @@
     docker service create -d \
     --name metricbeat \
     --network mangonet \
-    --mount type=bind,src=/srv/docker-volumes/elk/metricbeat/metricbeat.yml,dst=/usr/share/metricbeat/metricbeat.yml \
+    -v /srv/docker-volumes/elk/metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml \
     --mode global \
     docker.elastic.co/beats/metricbeat:6.1.3
   when: metric_status.rc == 1
