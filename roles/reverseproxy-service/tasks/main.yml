@@ -16,19 +16,21 @@
     --publish 80:80 \
     --publish 443:443 \
     --mode global \
-    nexus.sysmango.net/reverseproxy
+    nexus.sysmango.net:5000/reverseproxy
   run_once: true
-  when: reverseproxy_status.rc == 1
+  when: reverseproxy_status.rc != 0
 
 - name: Install SysMango Root cert
+  become: yes
   copy: 
-    src: SysMangoRootCA.crt 
-    dest: /usr/share/pki/trust/anchors/SysMangoRootCA.crt 
+    src: SysMangoRootCA.pem 
+    dest: /usr/share/pki/trust/anchors/SysMangoRootCA.pem 
 
 - name: Install SysMango Intermediate cert
+  become: yes
   copy: 
-    src: SysMangoIntermediateCA.crt 
-    dest: /usr/share/pki/trust/anchors/SysMangoIntermediateCA.crt 
+    src: SysMangoIntermediateCA.pem 
+    dest: /usr/share/pki/trust/anchors/SysMangoIntermediateCA.pem 
 
 - name: Update cert index
   become: yes

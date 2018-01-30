@@ -4,11 +4,13 @@ grid011
 [docker-worker]
 grid100
 grid111
+espresso
 
 [bootstrap]
 grid011
 grid100
 grid111
+espresso
 
 [nfs-server]
 grid011

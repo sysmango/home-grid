@@ -1,7 +1,7 @@
 ---
 
 - name: Check if Docker Registry service is running
-  command: docker service ls | awk '{print $2}' | grep registry
+  shell: docker service ls | awk '{print $2}' | grep registry
   changed_when: "false"
   register: registry_status
   failed_when: registry_status.rc == 2

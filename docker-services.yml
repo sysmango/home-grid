@@ -3,21 +3,22 @@
 - name: Do route53 work
   hosts: 127.0.0.1
   connection: local
-  gather_facts: "no"
+  gather_facts: no
   roles:
   - route53-smtp
 
 - name: Deploy docker services
   hosts: docker-manager[0]
+  gather_facts: yes
   roles:
   # - registry-service
   - nexus-service
   - smtp-service
   - elk-service
   - database-service
+  - redis-service
   - jira-service
   - jenkins-service
-  - redis-service
   # - owncloud-service
   - monitoring-service
   - reverseproxy-service

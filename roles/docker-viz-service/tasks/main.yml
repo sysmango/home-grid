@@ -1,7 +1,7 @@
 ---
 
 - name: Check if Docker Visualizer service is running
-  command: docker service ls | awk '{print $2}' | grep -v vis
+  shell: docker service ls | awk '{print $2}' | grep -v vis
   changed_when: false
   register: viz_status
   failed_when: viz_status.rc == 2

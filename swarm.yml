@@ -6,8 +6,8 @@
 - hosts: docker-manager
   become: true
   tasks:
-    - name: determine swarm status
-      command: >
+    - name: determine manager swarm status
+      shell: >
         docker info | egrep '^Swarm: ' | cut -d ' ' -f2
       register: swarm_status
 
@@ -34,8 +34,8 @@
 - hosts: docker-worker
   become: true
   tasks:
-    - name: determine swarm status
-      command: >
+    - name: determine worker swarm status
+      shell: >
         docker info | egrep '^Swarm: ' | cut -d ' ' -f2
       register: swarm_status
 

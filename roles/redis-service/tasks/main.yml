@@ -1,7 +1,7 @@
 ---
 
 - name: Check if redis service is running
-  command: docker service ls | awk '{print $2}' | grep redis
+  shell: docker service ls | awk '{print $2}' | grep redis
   changed_when: false
   ignore_errors: true
   failed_when: redis_status.rc == 2
