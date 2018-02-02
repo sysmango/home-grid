@@ -1,4 +1,4 @@
 {
-  "insecure-registries" : ["registry.sysmango.net:5000","registry:5000","nexus.sysmango.net:5000","nexus:5000"]
-
+  "insecure-registries" : ["registry.sysmango.net:5000","registry:5000","nexus.sysmango.net:5000","nexus:5000"],
+  "hosts": [ "tcp://0.0.0.0:2375" ]
 }

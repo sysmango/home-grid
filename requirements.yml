@@ -1,0 +1,6 @@
+---
+
+- src: git+https://butch@bitbucket.org/sysmango/nextcloud-service.git
+  path: roles
+  name: nextcloud-service
+

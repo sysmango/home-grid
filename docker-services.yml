@@ -20,5 +20,6 @@
   - jira-service
   - jenkins-service
   # - owncloud-service
+  - nextcloud-service
   - monitoring-service
   - reverseproxy-service
