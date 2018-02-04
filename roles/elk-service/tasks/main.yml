@@ -85,7 +85,6 @@
     --name kibana \
     --network mangonet \
     --publish 5601:5601 \
-    --network traefik-net \
     --label traefik.port=5601 \
     --mount type=bind,src=/srv/docker-volumes/elk/kibana/data,dst=/var/lib/kibana \
     --replicas 1 \
