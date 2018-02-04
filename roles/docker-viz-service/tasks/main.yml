@@ -16,3 +16,14 @@
     --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
     dockersamples/visualizer
   when: viz_status.rc == 1
+
+- name: Register viz name with Route53
+  connection: local
+  route53:
+    state: present
+    zone: sysmango.net
+    record: viz.sysmango.net
+    type: A
+    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    overwrite: "yes"
+    wait: "yes"

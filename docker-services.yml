@@ -12,6 +12,7 @@
   gather_facts: yes
   roles:
   - traefik-service
+  - docker-viz-service
   - nexus-service
   - smtp-service
   - elk-service
