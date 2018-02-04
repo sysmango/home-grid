@@ -33,6 +33,7 @@
     --mount type=bind,src=/srv/docker-volumes/nexus,dst=/nexus-data \
     --replicas 1 \
     --label traefik.port=8081 \
+    --label traefik.docker.network=mangonet \
     sonatype/nexus3
   when: nexus_status.rc == 1
 

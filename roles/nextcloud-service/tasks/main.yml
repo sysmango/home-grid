@@ -102,12 +102,3 @@
     value: 192.168.1.143,192.168.1.224,192.168.1.201
     overwrite: "yes"
     wait: "yes"
-
-- name: "wait for nextcloud to come up"
-     uri:
-       url: "http://nextcloud.sysmango.net"
-       status_code: 200
-     register: result
-     until: result.status == 200
-     retries: 600
-     delay: 1
