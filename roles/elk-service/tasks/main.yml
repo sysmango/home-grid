@@ -84,17 +84,27 @@
     docker service create -d \
     --name kibana \
     --network mangonet \
-    --publish 5601:5601 \
     --label traefik.port=5601 \
     --mount type=bind,src=/srv/docker-volumes/elk/kibana/data,dst=/var/lib/kibana \
     --replicas 1 \
     docker.elastic.co/kibana/kibana-oss:6.1.3
   when: kibana_status.rc == 1
 
-- name: Wait for kibana startup
-  wait_for:
-    port: 5601
-    timeout: 5000
+#     --publish 5601:5601 \
+
+# - name: "wait for Kibana to come up"
+#      uri:
+#        url: "http://kibana.sysmango.net"
+#        status_code: 200
+#      register: result
+#      until: result.status == 200
+#      retries: 6000
+#      delay: 1
+
+# - name: Wait for kibana startup
+#   wait_for:
+#     port: 5601
+#     timeout: 5000
 
 # Defaults
 # --env=SERVER_NAME=kibana.sysmango.net
