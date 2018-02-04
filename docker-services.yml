@@ -11,7 +11,7 @@
   hosts: docker-manager[0]
   gather_facts: yes
   roles:
-  # - registry-service
+  - traefik-service
   - nexus-service
   - smtp-service
   - elk-service
@@ -19,7 +19,6 @@
   - redis-service
   - jira-service
   - jenkins-service
-  # - owncloud-service
   - nextcloud-service
   - monitoring-service
-  - reverseproxy-service
+  # - reverseproxy-service

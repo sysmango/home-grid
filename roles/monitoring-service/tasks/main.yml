@@ -52,6 +52,7 @@
   command: |
     docker service create -d --name nagios  \
     --network mangonet \
+    --label traefik.port=80 \
     --mount type=bind,source=/srv/docker-volumes/nagios/etc/,target=/opt/nagios/etc/ \
     --mount type=bind,source=/srv/docker-volumes/nagios/var,target=/opt/nagios/var/ \
     --mount type=bind,source=/srv/docker-volumes/nagios/custom-plugins,target=/opt/Custom-Nagios-Plugins \

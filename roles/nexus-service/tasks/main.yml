@@ -28,13 +28,15 @@
   hosts: docker-manager
   shell: |
     docker service create -d \
-    --name nexus --network mangonet \
+    --name nexus \
     --publish 5000:5001 \
-    --publish 8081:8081 \
     --mount type=bind,src=/srv/docker-volumes/nexus,dst=/nexus-data \
     --replicas 1 \
+    --label traefik.port=8081 \
     sonatype/nexus3
   when: nexus_status.rc == 1
+
+#    --publish 8081:8081 \
 
 - name: Register nexus name with Route53
   connection: local

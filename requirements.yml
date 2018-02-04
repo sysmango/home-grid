@@ -1,6 +1,9 @@
 ---
 
-- src: git+https://butch@bitbucket.org/sysmango/nextcloud-service.git
+- src: git+git@bitbucket.org:sysmango/nextcloud-service.git
   path: roles
   name: nextcloud-service
 
+- src: git+git@bitbucket.org:sysmango/traefik-service.git
+  path: roles
+  name: traefik-service

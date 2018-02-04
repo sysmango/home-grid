@@ -49,12 +49,12 @@
     overwrite: yes
     wait: yes
 
-# - name: Wait for port 5432 of any IP to close active connections
-#   wait_for:
-#     host: postgres.sysmango.net
-#     port: 5432
-#     state: started
-#     timeout: 5000
+- name: Wait for port 5432 of any IP to close active connections
+  wait_for:
+    host: postgres.sysmango.net
+    port: 5432
+    state: started
+    timeout: 5000
 
 # - name: Check if mysql service is running
 #   shell: docker service ls | awk '{print $2}' | grep mysql

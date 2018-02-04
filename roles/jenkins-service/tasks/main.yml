@@ -38,6 +38,7 @@
   command: |
     docker service create -d --name jenkins \
     --network mangonet \
+    --label traefik.port=8080 \
     --mount type=bind,src=/srv/docker-volumes/jenkins,dst=/var/jenkins_home \
     --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
     --constraint=node.role==manager \
@@ -50,6 +51,4 @@
 #   url: http://jenkins.sysmango.net 
 #   status_code: 200 
 #   timeout: 3000
-#   async: 3000
-#   poll: 10
-#   register: amiup
+#   register: is_jenkinsup

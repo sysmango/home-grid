@@ -42,6 +42,7 @@
   command: |
     docker service create -d --name jira \
     --network mangonet \
+    --label traefik.port=8080 \
     --mount type=bind,src=/srv/docker-volumes/jira/data,dst=/var/atlassian/jira \
     --mount type=bind,src=/srv/docker-volumes/jira/logs,dst=/opt/atlassian/jira/logs \
     --replicas 1 \
