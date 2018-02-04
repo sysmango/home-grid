@@ -49,7 +49,7 @@
     zone: sysmango.net
     record: elasticsearch.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: "yes"
     wait: "yes"
 
@@ -117,7 +117,7 @@
     zone: sysmango.net
     record: kibana.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: "yes"
     wait: "yes"
 
@@ -177,7 +177,7 @@
     zone: sysmango.net
     record: logstash.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: "yes"
     wait: "yes"
 

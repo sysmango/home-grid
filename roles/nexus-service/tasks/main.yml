@@ -29,6 +29,7 @@
   shell: |
     docker service create -d \
     --name nexus \
+    --network mangonet \
     --publish 5000:5001 \
     --mount type=bind,src=/srv/docker-volumes/nexus,dst=/nexus-data \
     --replicas 1 \
@@ -46,7 +47,7 @@
     zone: sysmango.net
     record: nexus.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: yes
     wait: yes
 

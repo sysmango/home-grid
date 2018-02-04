@@ -16,7 +16,17 @@
     mode: 0777
   any_errors_fatal: true
   when: nextcloud_status.rc == 1
-  
+
+- name: Create nextcloud volume http directory
+  hosts: nfs-server[0]
+  become: "yes"
+  file:
+    path: /srv/nfs/nextcloud/html
+    state: directory
+    mode: 0777
+  any_errors_fatal: true
+  when: nextcloud_status.rc == 1
+
 - name: Create nextcloud volume data directory
   hosts: nfs-server[0]
   become: "yes"
@@ -53,7 +63,7 @@
     login_host: postgres
     login_password: dbadmin
     user: nextcloud
-    password: 'str[\"md5\"] + md5[ nextadmin + nextcloud ]'
+    password: nextadmin
     encrypted: "yes"
     state: present
   when: nextcloud_status.rc == 1
@@ -73,18 +83,17 @@
   command: | 
     docker service create -d --name nextcloud \
     --network mangonet \
-    --label treafik.port=80 \
+    --label traefik.port=80 \
+    --mount type=bind,src=/srv/docker-volumes/nextcloud/html,dst=/var/wwww/html \
     --mount type=bind,src=/srv/docker-volumes/nextcloud/config,dst=/var/wwww/html/config \
     --mount type=bind,src=/srv/docker-volumes/nextcloud/data,dst=/var/wwww/html/data \
     --mount type=bind,src=/srv/docker-volumes/nextcloud/custom_apps,dst=/var/wwww/html/custom_apps \
     -e POSTGRES_DB=nextcloud \
-    -e POSTGRES_USER=nextcloud
+    -e POSTGRES_USER=nextcloud \
     -e POSTGRES_PASSWORD=nextadmin \
     -e POSTGRES_HOST=postgres:5432 \
     -e NEXTCLOUD_ADMIN_USER=sysmango \
-    -e NEXTCLOUD_ADMIN_PASSWORD=Atr0c1ty! \
-    -e NEXTCLOUD_REDIS_ENABLED=true \
-    -e NEXTCLOUD_REDIS_HOST=redis \
+    -e NEXTCLOUD_ADMIN_PASSWORD='Atr0c1ty!' \
     --replicas 1 \
     nextcloud:latest  
   run_once: true
@@ -99,6 +108,6 @@
     zone: sysmango.net
     record: nextcloud.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: "yes"
     wait: "yes"

@@ -6,7 +6,7 @@
     zone: sysmango.net
     record: smtp.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: yes
     wait: yes
 
@@ -16,7 +16,7 @@
     zone: sysmango.net
     record: registry.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: yes
     wait: yes
 
@@ -26,7 +26,7 @@
     zone: sysmango.net
     record: jenkins.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: yes
     wait: yes
 
@@ -36,7 +36,7 @@
     zone: sysmango.net
     record: jira.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: yes
     wait: yes
 
@@ -46,7 +46,7 @@
     zone: sysmango.net
     record: nagios.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: yes
     wait: yes
 
@@ -56,6 +56,6 @@
     zone: sysmango.net
     record: kibana.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.201
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
     overwrite: yes
     wait: yes
