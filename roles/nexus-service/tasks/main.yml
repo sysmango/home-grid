@@ -33,8 +33,15 @@
     --publish 5000:5001 \
     --mount type=bind,src=/srv/docker-volumes/nexus,dst=/nexus-data \
     --replicas 1 \
-    --label traefik.port=8081 \
     --label traefik.docker.network=mangonet \
+    --label traefik.nexus.port=8081 \
+    --label traefik.nexus.frontend.rule="Host:nexus.sysmango.net" \
+    --label traefik.nexus.docker.network=mangonet \
+    --label traefik.registry.port=5000 \
+    --label traefik.registry.frontend.rule="Host:registry.sysmango.net" \
+    --label traefik.registry.docker.network=mangonet \
+    --label traefik.https.tls.certificates.certFile=/srv/docker-volumes/nexus/keystores/nexus-bundle.crt \
+    --label traefik.https.tls.certificates.keyFile=/srv/docker-volumes/nexus/keystores/nexus.key \
     sonatype/nexus3
   when: nexus_status.rc == 1
 
@@ -51,9 +58,20 @@
     overwrite: yes
     wait: yes
 
+- name: Register nexus name with Route53
+  connection: local
+  route53:
+    state: present
+    zone: sysmango.net
+    record: registry.sysmango.net
+    type: A
+    value: 192.168.1.143,192.168.1.224,192.168.1.200
+    overwrite: yes
+    wait: yes
+
 - name: Wait for port 5000  to open so the private registry is accessible 
   wait_for:
-    host: nexus.sysmango.net
+    host: registry.sysmango.net
     port: 5000
     timeout: 5000
     state: started
