@@ -7,3 +7,7 @@
 - src: git+git@bitbucket.org:sysmango/traefik-service.git
   path: roles
   name: traefik-service
+
+- src: git+git@bitbucket.org:sysmango/vault-service.git
+  path: roles
+  name: vault-service
