@@ -51,3 +51,9 @@ test/vagrant-spec/boxes/*.box
 
 # ansible retry files
 *.retry
+
+# ansible roles pulled from local galaxy
+roles/nextcloud-service/
+roles/vault-service/
+roles/traefik-service/
+
