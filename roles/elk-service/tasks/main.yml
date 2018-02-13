@@ -34,7 +34,7 @@
     --mount type=bind,src=/srv/docker-volumes/elk/elasticsearch,dst=/usr/share/elasticsearch/data \
     --replicas 1 \
     --publish 9200:9200 --publish 9300:9300 -e "discovery.type=single-node" \
-    docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.3
+    docker.elastic.co/elasticsearch/elasticsearch:6.2.1
   when: elastic_status.rc==1
 
 - name: Wait for elasticsearch startup
@@ -87,7 +87,7 @@
     --label traefik.port=5601 \
     --mount type=bind,src=/srv/docker-volumes/elk/kibana/data,dst=/var/lib/kibana \
     --replicas 1 \
-    docker.elastic.co/kibana/kibana-oss:6.1.3
+    docker.elastic.co/kibana/kibana:6.2.1
   when: kibana_status.rc == 1
 
 #     --publish 5601:5601 \
@@ -162,7 +162,7 @@
     --publish 5014:5014 \
     --mount type=bind,src=/srv/docker-volumes/elk/logstash/pipeline/,dst=/usr/share/logstash/pipeline/ \
     --replicas 1 \
-    docker.elastic.co/logstash/logstash-oss:6.1.3
+    docker.elastic.co/logstash/logstash:6.2.1
   when: logstash_status.rc == 1
 
 - name: Wait for logstash startup
@@ -223,7 +223,7 @@
 # - name: Install metricbeat index to elasticsearch
 #   hosts: docker-master
 #   command: |
-#     docker run docker.elastic.co/beats/metricbeat:6.1.3 \
+#     docker run docker.elastic.co/beats/metricbeat:6.2.1 \
 #     setup --template -E output.logstash.enabled=false \
 #     -E 'output.elasticsearch.hosts=["elasticsearch:9200"]'
 #   when: metric_status.rc == 1
@@ -233,7 +233,7 @@
 #   command: |
 #     docker run \
 #     -v /srv/docker-volumes/elk/metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml \
-#     docker.elastic.co/beats/metricbeat:6.1.3 setup --dashboards
+#     docker.elastic.co/beats/metricbeat:6.2.1 setup --dashboards
 #   when: metric_status.rc == 1
 
 - name: Deploy metricbeat service
@@ -244,5 +244,5 @@
     --network mangonet \
     --mount type=bind,src=/srv/docker-volumes/elk/metricbeat/metricbeat.yml,dst=/usr/share/metricbeat/metricbeat.yml \
     --mode global \
-    docker.elastic.co/beats/metricbeat:6.1.3
+    docker.elastic.co/beats/metricbeat:6.2.1
   when: metric_status.rc == 1
