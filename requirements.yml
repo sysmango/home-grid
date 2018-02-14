@@ -11,3 +11,8 @@
 - src: git+git@bitbucket.org:sysmango/vault-service.git
   path: roles
   name: vault-service
+
+- src: git+git@bitbucket.org:sysmango/elastic-service.git
+  path: roles
+  name: elastic-service
+
