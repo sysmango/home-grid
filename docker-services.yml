@@ -15,11 +15,10 @@
   - docker-viz-service
   - nexus-service
   - smtp-service
-  - elk-service
+  - elastic-service
   - database-service
   - redis-service
   - jira-service
   - jenkins-service
   - nextcloud-service
   - monitoring-service
-  # - reverseproxy-service

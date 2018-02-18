@@ -56,4 +56,5 @@ test/vagrant-spec/boxes/*.box
 roles/nextcloud-service/
 roles/vault-service/
 roles/traefik-service/
+roles/elastic-service/
 
