@@ -1,5 +1,23 @@
 ---
 
+# ---
+# SLAM_TASKNAME: SYSMANGO DOCKER SERVICES PLAYBOOK
+# SLAM_FACT_SYSTEM: Linux
+# SLAM_Q: [ play,triage ]
+# SLAM_FF_TARGET:
+#   type: Integer
+#   required: false
+#   prompt: Enter the target
+#   ghost: eg www.google.com
+#   default: www.csc.com
+#   tooltip: Target Name
+# SLAM_FF_NUMTRIES:
+#   type: Integer
+#   required: true
+#   prompt: Enter the Number of tries
+#   default: 3
+# ---
+
 - name: Do route53 work
   hosts: 127.0.0.1
   connection: local
@@ -15,7 +33,7 @@
   - docker-viz-service
   - nexus-service
   - smtp-service
-  - elastic-service
+  #  - elastic-service
   - database-service
   - redis-service
   - jira-service
