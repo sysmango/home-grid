@@ -46,6 +46,6 @@
     --mount type=bind,src=/srv/docker-volumes/jira/data,dst=/var/atlassian/jira \
     --mount type=bind,src=/srv/docker-volumes/jira/logs,dst=/opt/atlassian/jira/logs \
     --replicas 1 \
-    nexus.sysmango.net:5000/jira:latest
+    registry.sysmango.net/jira:latest
   run_once: true
   when: jira_status.rc == 1

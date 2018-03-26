@@ -41,10 +41,10 @@
 #   notify:
 #   - reboot linux
 
-- name: Add python2-boto
-  zypper:
-    name: python2-boto
-    state: present
+    #- name: Add python2-boto
+    #  zypper:
+    #name: python2-boto
+    #state: present
 
 - name: Add route53 entries
   connection: local

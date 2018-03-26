@@ -52,7 +52,7 @@
     zone: sysmango.net
     record: nexus.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.200
+    value: 192.168.1.144,192.168.1.225,192.168.1.200
     overwrite: yes
     wait: yes
 
@@ -63,7 +63,7 @@
     zone: sysmango.net
     record: registry.sysmango.net
     type: A
-    value: 192.168.1.143,192.168.1.224,192.168.1.200
+    value: 192.168.1.144,192.168.1.225,192.168.1.200
     overwrite: yes
     wait: yes
 
