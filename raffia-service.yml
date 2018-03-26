@@ -1,0 +1,7 @@
+---
+
+- name: Deploy docker services
+  hosts: docker-manager[0]
+  gather_facts: yes
+  roles:
+  - raffia-service

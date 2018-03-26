@@ -16,3 +16,7 @@
   path: roles
   name: elastic-service
 
+- src: git+git@bitbucket.org:sysmango/raffia-service.git
+  path: roles
+  name: raffia-service
+

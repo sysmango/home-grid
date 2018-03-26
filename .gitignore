@@ -57,4 +57,5 @@ roles/nextcloud-service/
 roles/vault-service/
 roles/traefik-service/
 roles/elastic-service/
+roles/raffia-service/
 
