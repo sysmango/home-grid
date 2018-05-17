@@ -1,16 +1,12 @@
 ---
 
-- src: git+git@bitbucket.org:sysmango/nextcloud-service.git
+- src: http://nexus.sysmango.net/repository/ansible/prod/nextcloud-serice.tar.gz
   path: roles
   name: nextcloud-service
 
 - src: git+git@bitbucket.org:sysmango/traefik-service.git
   path: roles
   name: traefik-service
-
-- src: git+git@bitbucket.org:sysmango/vault-service.git
-  path: roles
-  name: vault-service
 
 - src: git+git@bitbucket.org:sysmango/elastic-service.git
   path: roles
@@ -24,3 +20,6 @@
   path: roles
   name: camunda-service
 
+- src: http://nexus.sysmango.net/repository/ansible/prod/database-service.tar.gz
+  path: roles
+  name: database-service
