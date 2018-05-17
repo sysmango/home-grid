@@ -59,4 +59,5 @@ roles/traefik-service/
 roles/elastic-service/
 roles/raffia-service/
 roles/camunda-service/
+roles/database-service/
 
