@@ -1,5 +1,4 @@
 ---
-
 - src: http://nexus.sysmango.net/repository/ansible/prod/nextcloud-serice.tar.gz
   path: roles
   name: nextcloud-service
@@ -23,4 +22,3 @@
 - src: git+git@bitbucket.org:sysmango/camunda-service.git
   path: roles
   name: camunda-service
-
