@@ -434,19 +434,19 @@ pipeline {
                   }                  
                 }
             }*/
-/*            stage('Ansible Playbook Analytics Logged') {
+            stage('Ansible Playbook Analytics Logged') {
                 steps{
                   script {
                         //running grep to ensure all ansible playbooks are writing logs analytics team needs"
                         // currently on searching root if want to search all files use **/*.yml
-                        def filesToProcess = findFiles(glob: '*.yml')
+                        def filesToProcess = findFiles(glob: '**.yml')
                         for (def fileToProcess : filesToProcess) {
                               //sh "echo grep hosts ${fileToProcess}"
-                              sh "grep hosts ${fileToProcess}"
+                              echo "grep hosts ${fileToProcess}"
                         }
                   }                  
                 }
-            }*/
+            }
       }
       post { 
         unstable { 
