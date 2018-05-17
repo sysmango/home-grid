@@ -434,7 +434,7 @@ pipeline {
                   }                  
                 }
             }*/
-            stage('Ansible Playbook Analytics Logged') {
+/*            stage('Ansible Playbook Analytics Logged') {
                 steps{
                   script {
                         //running grep to ensure all ansible playbooks are writing logs analytics team needs"
@@ -446,7 +446,7 @@ pipeline {
                         }
                   }                  
                 }
-            }
+            }*/
       }
       post { 
         unstable { 
