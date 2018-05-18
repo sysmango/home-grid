@@ -121,14 +121,6 @@ pipeline {
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
                               },
-                              s: {      
-                                    try{                        
-                                          sh "yamllint -c jenkins/yamllint_config roles/reverseproxy-service/*/*.yml"
-                                    } catch (err) {
-                                          echo "yamllint reported errors, continuing with pipeline"
-                                          currentBuild.result = 'UNSTABLE'
-					      }                                          
-                              },
                               t: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/route53-smtp/*/*.yml"
@@ -269,14 +261,6 @@ pipeline {
                               r: {      
                                     try{                        
                                           sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/redis-service/*/*.yml"
-                                    } catch (err) {
-                                          echo "ansible-lint reported errors, continuing with pipeline"
-                                          currentBuild.result = 'UNSTABLE'
-					      }                                          
-                              },
-                              s: {      
-                                    try{                        
-                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/reverseproxy-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
