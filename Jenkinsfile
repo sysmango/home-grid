@@ -97,14 +97,6 @@ pipeline {
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
                               },
-                              o: {      
-                                    try{                        
-                                          sh "yamllint -c jenkins/yamllint_config roles/nexus-service-service/*/*.yml"
-                                    } catch (err) {
-                                          echo "yamllint reported errors, continuing with pipeline"
-                                          currentBuild.result = 'UNSTABLE'
-					      }                                          
-                              },
                               p: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/nfs-client/*/*.yml"
@@ -253,14 +245,6 @@ pipeline {
                               n: {      
                                     try{                        
                                           sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/monitoring-service/*/*.yml"
-                                    } catch (err) {
-                                          echo "ansible-lint reported errors, continuing with pipeline"
-                                          currentBuild.result = 'UNSTABLE'
-					      }                                          
-                              },
-                              o: {      
-                                    try{                        
-                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/nexus-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
