@@ -48,7 +48,7 @@
   when: jenkins_status.rc == 1
 
 # - uri:
-#   url: http://jenkins.sysmango.net 
-#   status_code: 200 
+#   url: http://jenkins.sysmango.net
+#   status_code: 200
 #   timeout: 3000
 #   register: is_jenkinsup

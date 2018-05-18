@@ -57,22 +57,6 @@ pipeline {
                                           currentBuild.result = 'UNSTABLE'
 					      }                                          
                               },
-                              g: {      
-                                    try{                        
-                                          sh "yamllint -c jenkins/yamllint_config roles/dup/*/*.yml"
-                                    } catch (err) {
-                                          echo "yamllint reported errors, continuing with pipeline"
-                                          currentBuild.result = 'UNSTABLE'
-					      }                                          
-                              },
-                              h: {      
-                                    try{                        
-                                          sh "yamllint -c jenkins/yamllint_config roles/elk-service/*/*.yml"
-                                    } catch (err) {
-                                          echo "yamllint reported errors, continuing with pipeline"
-                                          currentBuild.result = 'UNSTABLE'
-					      }                                          
-                              },
                               i: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/etcd-install/*/*.yml"

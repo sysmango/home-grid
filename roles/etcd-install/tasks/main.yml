@@ -1,17 +1,17 @@
 ---
 
-- name: Install etcd package 
+- name: Install etcd package
   zypper:
     name: etcd
     state: present
 
-- name: Install etcdctl package 
+- name: Install etcdctl package
   zypper:
     name: etcdctl
     state: present
 
 - name: Configure etcd sysconfig
-  template: 
+  template:
     src: etcd.j2
     dest: /etc/sysconfig/etcd
 
