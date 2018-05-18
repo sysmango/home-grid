@@ -178,14 +178,6 @@ pipeline {
                                           currentBuild.result = 'UNSTABLE'
 					      }
                               },
-                              c: {
-                                    try{                              
-                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/database-service/*/*.yml"
-                                    } catch (err) {
-                                          echo "ansible-lint reported errors, continuing with pipeline"
-                                          currentBuild.result = 'UNSTABLE'
-					      }                                          
-                              },
                               d: {      
                                     try{                        
                                           sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/docker-bootstrap/*/*.yml"
@@ -205,14 +197,6 @@ pipeline {
                               f: {      
                                     try{                        
                                           sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/docker-viz-service/*/*.yml"
-                                    } catch (err) {
-                                          echo "ansible-lint reported errors, continuing with pipeline"
-                                          currentBuild.result = 'UNSTABLE'
-					      }                                          
-                              },
-                              g: {      
-                                    try{                        
-                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/dup/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
