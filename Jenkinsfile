@@ -25,14 +25,6 @@ pipeline {
                                           currentBuild.result = 'UNSTABLE'
 					      }
                               },
-                              c: {
-                                    try{                              
-                                          sh "yamllint -c jenkins/yamllint_config roles/database-service/*/*.yml"
-                                    } catch (err) {
-                                          echo "yamllint reported errors, continuing with pipeline"
-                                          currentBuild.result = 'UNSTABLE'
-					      }                                          
-                              },
                               d: {      
                                     try{                        
                                           sh "yamllint -c jenkins/yamllint_config roles/docker-bootstrap/*/*.yml"
