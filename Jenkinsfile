@@ -408,17 +408,7 @@ pipeline {
                 }
             }
       }
-      post { 
-        unstable { 
-            echo 'Todo send a message to slack when pipeline is unstable!'
-        }
-        failure { 
-            echo 'Todo send a message to slack when pipeline fails!'
-        }
-        always { 
-            echo 'Thank you I have been your Jenkins pipeline today, as a worker in the service industry any and all gratuities are welcome!'
-        }
-    }
+   }
 }
 
 
