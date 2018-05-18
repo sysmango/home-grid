@@ -9,7 +9,7 @@
 
 - name: Deploy smtp service
   hosts: docker-manager[0]
-  command: | 
+  command: |
     docker service create --name smtp \
     --network mangonet \
     -e SYSTEM_TIMEZONE=America/New_York \

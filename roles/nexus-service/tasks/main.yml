@@ -8,7 +8,7 @@
 
 - name: setup daemon.json
   become: "yes"
-  copy: 
+  copy:
     src: daemon.json
     dest: /etc/docker/daemon.json
   when: nexus_status.rc == 1
@@ -67,7 +67,7 @@
     overwrite: yes
     wait: yes
 
-- name: Wait for port 5000  to open so the private registry is accessible 
+- name: Wait for port 5000  to open so the private registry is accessible
   wait_for:
     host: registry.sysmango.net
     port: 5000

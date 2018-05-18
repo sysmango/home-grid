@@ -164,7 +164,7 @@ pipeline {
                       parallel(
                               a: {
                                     try{
-                                          sh "ansible-lint -c jenkins/ansible-lint_config *.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 *.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE' 
@@ -172,7 +172,7 @@ pipeline {
                               },
                               b: {
                                     try{
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/common/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/common/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -180,7 +180,7 @@ pipeline {
                               },
                               c: {
                                     try{                              
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/database-service/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/database-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -188,7 +188,7 @@ pipeline {
                               },
                               d: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/docker-bootstrap/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/docker-bootstrap/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -196,7 +196,7 @@ pipeline {
                               },
                               e: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/docker-install/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/docker-install/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -204,7 +204,7 @@ pipeline {
                               },
                               f: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/docker-viz-service/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/docker-viz-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -212,7 +212,7 @@ pipeline {
                               },
                               g: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/dup/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/dup/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -220,7 +220,7 @@ pipeline {
                               },
                               h: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/elk-service/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/elk-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -228,7 +228,7 @@ pipeline {
                               },
                               i: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/ectd-install/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/ectd-install/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -236,7 +236,7 @@ pipeline {
                               },
                               j: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/flannel-install/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/flannel-install/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -244,7 +244,7 @@ pipeline {
                               },
                               k: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/jenkins-service/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/jenkins-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -252,7 +252,7 @@ pipeline {
                               },
                               l: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/jira-service/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/jira-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -260,7 +260,7 @@ pipeline {
                               },
                               m: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/mangonet/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/mangonet/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -268,7 +268,7 @@ pipeline {
                               },
                               n: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/monitoring-service/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/monitoring-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -276,7 +276,7 @@ pipeline {
                               },
                               o: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/nexus-service/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/nexus-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -284,7 +284,7 @@ pipeline {
                               },
                               p: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/nfs-client/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/nfs-client/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -292,7 +292,7 @@ pipeline {
                               },
                               q: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/nfs-server/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/nfs-server/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -300,7 +300,7 @@ pipeline {
                               },
                               r: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/redis-service/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/redis-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -308,7 +308,7 @@ pipeline {
                               },
                               s: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/reverseproxy-service/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/reverseproxy-service/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -316,7 +316,7 @@ pipeline {
                               },
                               t: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/route53-smtp/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/route53-smtp/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
@@ -324,7 +324,7 @@ pipeline {
                               },
                               u: {      
                                     try{                        
-                                          sh "ansible-lint -c jenkins/ansible-lint_config roles/sysmango-bootstrap/*/*.yml"
+                                          sh "ansible-lint -x ANSIBLE0012,ANSIBLE0013 roles/sysmango-bootstrap/*/*.yml"
                                     } catch (err) {
                                           echo "ansible-lint reported errors, continuing with pipeline"
                                           currentBuild.result = 'UNSTABLE'
