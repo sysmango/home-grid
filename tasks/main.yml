@@ -1,0 +1,43 @@
+---
+
+- name: Check if Sonatype Nexus service is running
+  shell: docker service ls | awk '{print $2}' | grep nexus
+  changed_when: false
+  register: nexus_status
+  failed_when: nexus_status.rc == 2
+
+- name: Create nexus volume directory
+  hosts: nfs-server[0]
+  become: "yes"
+  file:
+    path: /srv/nfs/nexus
+    state: directory
+    mode: 0777
+  any_errors_fatal: true
+  when: nexus_status.rc == 1
+
+- name: Deploy docker nexus service
+  hosts: docker-manager
+  shell: |
+    docker service create -d \
+    --name nexus \
+    --network mangonet \
+    --publish 5000:5001 \
+    --mount 'type=volume,"volume-opt=o=addr=grid011.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/nexus,volume-opt=type=nfs,target=/nexus-data' \
+    --replicas 1 \
+    --label traefik.docker.network=mangonet \
+    --label traefik.nexus.port=8081 \
+    --label traefik.nexus.frontend.rule="Host:nexus.sysmango.net" \
+    --label traefik.nexus.docker.network=mangonet \
+    --label traefik.registry.port=5000 \
+    --label traefik.registry.frontend.rule="Host:registry.sysmango.net" \
+    --label traefik.registry.docker.network=mangonet \
+    sonatype/nexus3
+  when: nexus_status.rc == 1
+
+- name: Wait for port 5000  to open so the private registry is accessible
+  wait_for:
+    host: registry.sysmango.net
+    port: 5000
+    timeout: 5000
+    state: started
