@@ -1,5 +1,12 @@
 ---
 
+- name: Install nfs client
+  become: "yes"
+  zypper:
+    name: nfs-client
+    type: package
+    state: present
+
 - name: Setup NFS client mount point for volumes
   become: "yes"
   file:
@@ -22,3 +29,4 @@
     name: nfs
     state: started
     enabled: "yes"
+
