@@ -18,12 +18,6 @@
 #   default: 3
 # ---
 
-- name: Do route53 work
-  hosts: 127.0.0.1
-  connection: local
-  gather_facts: no
-  roles:
-  - route53-smtp
 
 - name: Deploy docker services
   hosts: docker-manager[0]

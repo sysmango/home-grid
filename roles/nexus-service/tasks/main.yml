@@ -6,14 +6,6 @@
   register: nexus_status
   failed_when: nexus_status.rc == 2
 
-- name: setup daemon.json
-  become: "yes"
-  copy:
-    src: daemon.json
-    dest: /etc/docker/daemon.json
-  when: nexus_status.rc == 1
-  # notify: restart docker
-
 - name: Create nexus volume directory
   hosts: nfs-server[0]
   become: "yes"
@@ -31,7 +23,7 @@
     --name nexus \
     --network mangonet \
     --publish 5000:5001 \
-    --mount type=bind,src=/srv/docker-volumes/nexus,dst=/nexus-data \
+    --mount 'type=volume,"volume-opt=o=addr=grid011.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/nexus,volume-opt=type=nfs,target=/nexus-data' \
     --replicas 1 \
     --label traefik.docker.network=mangonet \
     --label traefik.nexus.port=8081 \
@@ -42,30 +34,6 @@
     --label traefik.registry.docker.network=mangonet \
     sonatype/nexus3
   when: nexus_status.rc == 1
-
-#    --publish 8081:8081 \
-
-- name: Register nexus name with Route53
-  connection: local
-  route53:
-    state: present
-    zone: sysmango.net
-    record: nexus.sysmango.net
-    type: A
-    value: 192.168.1.144,192.168.1.225,192.168.1.200
-    overwrite: yes
-    wait: yes
-
-- name: Register nexus name with Route53
-  connection: local
-  route53:
-    state: present
-    zone: sysmango.net
-    record: registry.sysmango.net
-    type: A
-    value: 192.168.1.144,192.168.1.225,192.168.1.200
-    overwrite: yes
-    wait: yes
 
 - name: Wait for port 5000  to open so the private registry is accessible
   wait_for:
