@@ -60,4 +60,5 @@ roles/elastic-service/
 roles/raffia-service/
 roles/camunda-service/
 roles/database-service/
+roles/vault-service/
 

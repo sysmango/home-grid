@@ -22,3 +22,7 @@
 - src: git+git@bitbucket.org:sysmango/camunda-service.git
   path: roles
   name: camunda-service
+
+- src: http://nexus.sysmango.net/repository/ansible/production/vault-service/1.0.0.7/vault-service-1.0.0.7.zip
+  path: roles
+  name: vault-service
