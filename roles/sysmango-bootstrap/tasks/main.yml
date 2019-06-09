@@ -5,12 +5,6 @@
     name: butch
     shell: /bin/bash
 
-- name: Set authorized key took from url
-  authorized_key:
-    user: butch
-    state: present
-    key: https://github.com/butchlebo.keys
-
 - name: Make sure we have a 'wheel' group
   group:
     name: wheel
@@ -29,6 +23,12 @@
     name: butch
     groups: wheel
     append: true
+
+- name: Set authorized key took from url
+  authorized_key:
+    user: butch
+    state: present
+    key: https://github.com/butchlebo.keys
 
 - name: Setup local non-root user for raffia
   user:
@@ -49,14 +49,3 @@
     line: HandleLidSwitchDocked=ignore
     state: present
 
-- name: Add route53 entries
-  connection: local
-  become: "no"
-  route53:
-    state: present
-    zone: sysmango.net
-    record: "{{ inventory_hostname}}.sysmango.net"
-    type: A
-    value: "{{ ansible_default_ipv4.address }}"
-    overwrite: "yes"
-    wait: "yes"

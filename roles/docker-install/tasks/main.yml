@@ -15,3 +15,10 @@
   zypper:
     name: python-docker
     state: present
+
+- name: setup daemon.json
+  become: "yes"
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+  notify: restart docker

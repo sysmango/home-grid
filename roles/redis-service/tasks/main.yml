@@ -8,7 +8,6 @@
   register: redis_status
 
 - name: Create redis volume directory
-  hosts: nfs-server[0]
   become: "yes"
   file:
     path: /srv/nfs/redis
@@ -18,7 +17,6 @@
   when: redis_status.rc == 1
 
 - name: Create redis volume directory
-  hosts: nfs-server[0]
   become: "yes"
   file:
     path: /srv/nfs/redis/data
@@ -28,7 +26,6 @@
   when: redis_status.rc == 1
 
 - name: Deploy redis service
-  hosts: docker-manager[0]
   command: |
     docker service create -d --name redis \
     --network mangonet \

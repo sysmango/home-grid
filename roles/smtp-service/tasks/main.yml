@@ -1,4 +1,4 @@
----
+-
 
 - name: Check if SMTP service is running
   shell: docker service ls | awk '{print $2}' | grep smtp
@@ -8,14 +8,32 @@
   failed_when: smtp_status.rc == 2
 
 - name: Deploy smtp service
-  hosts: docker-manager[0]
   command: |
     docker service create --name smtp \
     --network mangonet \
     -e SYSTEM_TIMEZONE=America/New_York \
     -e EMAIL=bostch@gmail.com \
     -e EMAILPASS=awtusdlwnfexuujn \
-    -e MYNETWORKS="10.0.0.0/8 192.168.0.0/16 172.0.0.0/8" \
-    --publish 587:25  \
-    lylescott/postfix-gmail-relay
+     -e MYNETWORKS="10.0.0.0/8 192.168.0.0/16 172.0.0.0/8" \
+     --publish 587:25  \
+     lylescott/postfix-gmail-relay
   when: smtp_status.rc == 1
+
+# - name: Deploy smtp service
+#   docker_swarm_service:
+#    debug: yes
+#    name: smtp
+#    hostname: smtp
+#    image: lylescott/postfix-gmail-relay
+#    networks:
+#    - mangonet
+#    env:
+#    - "SYSTEM_TIMEZONE=America/New_York"
+#    - "EMAIL=bostch@gmail.com"
+#    - "EMAILPASS=awtusdlwnfexuujn"
+#    - "MYNETWORKS=\"10.0.0.0/8 192.168.0.0/16 172.0.0.0/8\""
+#    publish:
+#    - published_port: 587
+#      target_port: 25
+#    docker_host: tcp://sysmango.net:2375
+#   when: smtp_status.rc == 1

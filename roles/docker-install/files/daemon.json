@@ -1,0 +1,16 @@
+{
+  "insecure-registries" : [
+      "registry.sysmango.net:5000",
+      "registry:5000",
+      "registry.sysmango.net",
+      "nexus.sysmango.net:5000",
+      "nexus:5000",
+      "nexus.sysmango.net:5000"
+    ] ,
+  "log-level": "warn",
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "5"
+  }
+}

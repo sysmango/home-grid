@@ -2,9 +2,12 @@
 
 
 - name: Create mangonet overlay network
-  hosts: docker-manager
   # command: docker network create --driver overlay mangonet
   docker_network:
     name: mangonet
     driver: overlay
     state: present
+    attachable: true
+    scope: swarm
+    docker_host: tcp://sysmango.net:2375
+

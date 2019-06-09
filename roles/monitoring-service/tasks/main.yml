@@ -8,7 +8,6 @@
   register: nagios_status
 
 - name: Create nagios volume directory
-  hosts: nfs-server[0]
   become: "yes"
   file:
     path: /srv/nfs/nagios
@@ -18,7 +17,6 @@
   when: nagios_status.rc == 1
 
 - name: Create nagios local config directory etc
-  hosts: nfs-server[0]
   become: "yes"
   file:
     path: /srv/nfs/nagios/etc
@@ -28,7 +26,6 @@
   when: nagios_status.rc == 1
 
 - name: Create nagios local config directory var
-  hosts: nfs-server[0]
   become: "yes"
   file:
     path: /srv/nfs/nagios/var
@@ -38,7 +35,6 @@
   when: nagios_status.rc == 1
 
 - name: Create nagios local config directory custom
-  hosts: nfs-server[0]
   become: "yes"
   file:
     path: /srv/nfs/nagios/custom-plugins
@@ -48,14 +44,15 @@
   when: nagios_status.rc == 1
 
 - name: Deploy nagios service
-  hosts: docker-manager[0]
   command: |
     docker service create -d --name nagios  \
     --network mangonet \
     --label traefik.port=80 \
-    --mount type=bind,source=/srv/docker-volumes/nagios/etc/,target=/opt/nagios/etc/ \
-    --mount type=bind,source=/srv/docker-volumes/nagios/var,target=/opt/nagios/var/ \
-    --mount type=bind,source=/srv/docker-volumes/nagios/custom-plugins,target=/opt/Custom-Nagios-Plugins \
+    --mount 'type=volume,"volume-opt=o=addr=files.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/nagios/etc,volume-opt=type=nfs,target=/opt/nagios/etc' \
+    --mount 'type=volume,"volume-opt=o=addr=files.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/nagios/var,volume-opt=type=nfs,target=/opt/nagios/var' \
+    --mount 'type=volume,"volume-opt=o=addr=files.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/nagios/custom-plugins,volume-opt=type=nfs,target=/opt/Custom-Nagios-Plugins' \
+    -e MAIL_RELAY_HOST=smtp \
+    -e NAGIOS_FQDN=nagios.sysmango.net \
     jasonrivers/nagios:latest
   run_once: true
   when: nagios_status.rc == 1
