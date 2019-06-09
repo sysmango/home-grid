@@ -7,6 +7,7 @@
       "nexus:5000",
       "nexus.sysmango.net:5000"
     ] ,
+  "hosts": [ "tcp://0.0.0.0:2375", "unix:///run/docker.sock" ],
   "log-level": "warn",
   "log-driver": "json-file",
   "log-opts": {
