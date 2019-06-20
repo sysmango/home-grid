@@ -65,3 +65,4 @@ roles/sonarqube-service/
 roles/sonarqube-setup/
 
 .scannerwork/
+.vscode/
