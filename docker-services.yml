@@ -18,25 +18,25 @@
 #   default: 3
 # ---
 
-- name: Do route53 work
-  hosts: 127.0.0.1
-  connection: local
-  gather_facts: no
+- name: Setup docker services environments
+  hosts: nfs_server
+  gather_facts: true
   roles:
-  - route53-smtp
+  - sonarqube-setup
 
 - name: Deploy docker services
-  hosts: docker-manager[0]
-  gather_facts: yes
+  hosts: leader
+  gather_facts: true
   roles:
   - traefik-service
   - docker-viz-service
   - nexus-service
   - smtp-service
-  #  - elastic-service
   - database-service
   - redis-service
   - jira-service
   - jenkins-service
   - nextcloud-service
-  - monitoring-service
+  - sonarqube-service
+  #  - elastic-service
+  #  - monitoring-service

@@ -1,7 +1,8 @@
 ---
 
 - name: Deploy docker services
-  hosts: docker-manager[0]
+  hosts: localhost
+  connection: local
   gather_facts: true
   roles:
-  - raffia-service
+  - camunda-deprovision
