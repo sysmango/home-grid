@@ -286,6 +286,16 @@ pipeline {
                   }                  
             }
       }
+      stage('SonarQube analysis') {
+            environment {
+                scannerHome = tool 'SonarQube-3.3.0.1492'
+            }
+            steps {
+                withSonarQubeEnv('SysMango SonarQube') {
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=home-grid -Dsonar.sources=. -Dsonar.login=e0f0e320aa71842559f7998dfd2af26cf1848f3f"
+                }
+            }
+        }
       // }
 	// }
             /* Commented out this stage because syntax check is already done by ansible-lint
