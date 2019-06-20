@@ -1,16 +1,37 @@
-[docker-manager]
+[docker_manager]
+grid011
+grid111
+grid100
+
+[leader]
 grid011
 
-[docker-worker]
-grid100
+[docker_worker]
+
+[docker]
+grid011
 grid111
+grid100
+
 
 [bootstrap]
 grid011
-grid100
 grid111
 grid101
+grid100
+files
 
-[nfs-server]
+[nfs_server]
+files
+
+[nfs_client]
 grid011
+grid111
+grid100
+grid101
 
+[vault]
+grid101
+
+[testing]
+espresso
