@@ -3,7 +3,7 @@
 # into two groups:
 #   - swarm_manager_operational (swarm is running and active)
 #   - swarm_manager_bootstrap (host needs to be joined to the cluster)
-- hosts: docker-manager
+- hosts: docker_manager
   become: true
   tasks:
     - name: determine manager swarm status
@@ -31,7 +31,7 @@
 # into two groups:
 #   - swarm_worker_operational (host is joined to the swarm cluster)
 #   - swarm_worker_bootstrap (host needs to be joined to the cluster)
-- hosts: docker-worker
+- hosts: docker_worker
   become: true
   tasks:
     - name: determine worker swarm status

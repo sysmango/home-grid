@@ -17,7 +17,7 @@
     state: present
 
 - name: setup daemon.json
-  become: "yes"
+  become: "true"
   copy:
     src: daemon.json
     dest: /etc/docker/daemon.json

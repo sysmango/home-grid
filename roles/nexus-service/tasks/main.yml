@@ -7,9 +7,9 @@
   failed_when: nexus_status.rc == 2
 
 - name: Create nexus volume directory
-  become: "yes"
+  become: "true"
   file:
-    path: /srv/nfs/nexus
+    path: /srv/docker-volumes/nexus
     state: directory
     mode: 0777
   any_errors_fatal: true
@@ -23,15 +23,25 @@
     --publish 5000:5001 \
     --mount 'type=volume,"volume-opt=o=addr=files.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/nexus,volume-opt=type=nfs,target=/nexus-data' \
     --replicas 1 \
+    --label traefik.enable=true \
     --label traefik.docker.network=mangonet \
-    --label traefik.nexus.port=8081 \
     --label traefik.nexus.frontend.rule="Host:nexus.sysmango.net" \
-    --label traefik.nexus.docker.network=mangonet \
-    --label traefik.registry.port=5000 \
+    --label traefik.nexus.port=8081 \
     --label traefik.registry.frontend.rule="Host:registry.sysmango.net" \
-    --label traefik.registry.docker.network=mangonet \
+    --label traefik.registry.port=5000 \
     sonatype/nexus3:latest
   when: nexus_status.rc == 1
+
+#--label "traefik.registry.backend=backend-nexus-registry" \
+
+# - "traefik.docker.network=web"
+# - "traefik.enable=true"
+# - "traefik.basic.frontend.rule=Host:app.my-awesome-app.org"
+# - "traefik.basic.port=9000"
+# - "traefik.basic.protocol=http"
+# - "traefik.admin.frontend.rule=Host:admin-app.my-awesome-app.org"
+# - "traefik.admin.protocol=https"
+# - "traefik.admin.port=9443"
 
 #    --publish 8081:8081 \
 
@@ -43,8 +53,8 @@
 #     record: nexus.sysmango.net
 #     type: A
 #     value: 192.168.1.144,192.168.1.200
-#     overwrite: yes
-#     wait: yes
+#     overwrite: true
+#     wait: true
 
 # - name: Register nexus name with Route53
 #   connection: local
@@ -54,8 +64,8 @@
 #     record: registry.sysmango.net
 #     type: A
 #     value: 192.168.1.144,192.168.1.200
-#     overwrite: yes
-#     wait: yes
+#     overwrite: true
+#     wait: true
 
 - name: Wait for port 5000  to open so the private registry is accessible
   wait_for:

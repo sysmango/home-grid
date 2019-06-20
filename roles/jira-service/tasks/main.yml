@@ -8,7 +8,7 @@
   failed_when: jira_status.rc == 2
 
 - name: Create jira volume root directory
-  become: "yes"
+  become: "true"
   file:
     path: /srv/nfs/jira
     state: directory
@@ -17,7 +17,7 @@
   when: jira_status.rc == 1
 
 - name: Create jira volume data directory
-  become: "yes"
+  become: "true"
   file:
     path: /srv/nfs/jira/data
     state: directory
@@ -26,7 +26,7 @@
   when: jira_status.rc == 1
 
 - name: Create jira volume logs directory
-  become: "yes"
+  become: "true"
   file:
     path: /srv/nfs/jira/logs
     state: directory
@@ -39,9 +39,13 @@
     docker service create -d --name jira \
     --network mangonet \
     --label traefik.port=8080 \
-    --mount type=bind,src=/srv/docker-volumes/jira/data,dst=/var/atlassian/jira \
-    --mount type=bind,src=/srv/docker-volumes/jira/logs,dst=/opt/atlassian/jira/logs \
+    --label traefik.enable=true \
+    --mount 'type=volume,"volume-opt=o=addr=files.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/jira/data,volume-opt=type=nfs,target=/var/atlassian/jira' \
+    --mount 'type=volume,"volume-opt=o=addr=files.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/jira/logs,volume-opt=type=nfs,target=/var/atlassian/jira/logs' \
     --replicas 1 \
     registry.sysmango.net/sysmango/jira:latest
   run_once: true
   when: jira_status.rc == 1
+
+# --mount type=bind,src=/srv/docker-volumes/jira/data,dst=/var/atlassian/jira \
+# --mount type=bind,src=/srv/docker-volumes/jira/logs,dst=/opt/atlassian/jira/logs \

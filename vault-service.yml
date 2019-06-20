@@ -1,0 +1,8 @@
+---
+
+- name: Deploy vault services
+  hosts: vault
+  gather_facts: true
+  become: true
+  roles:
+  - vault-service

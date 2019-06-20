@@ -1,24 +1,24 @@
 ---
 
 - name: Setup NFS client mount point for volumes
-  become: "yes"
+  become: "true"
   file:
     path: /srv/docker-volumes
     state: directory
     mode: 0777
 
 - name: Mount NFS volume root
-  become: "yes"
+  become: "true"
   mount:
     path: /srv/docker-volumes
-    src: grid011.sysmango.net:/srv/nfs
+    src: files.sysmango.net:/srv/nfs
     fstype: nfs
     opts: rw
     state: mounted
 
 - name: Make sure NFS mounts will mount on startup
-  become: "yes"
+  become: "true"
   service:
     name: nfs
     state: started
-    enabled: "yes"
+    enabled: "true"

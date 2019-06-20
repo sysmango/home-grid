@@ -2,11 +2,8 @@
 
 - name: Install NFS server components
   zypper:
-    name: "{{ item }}"
+    name: ['nfs-kernel-server', 'yast2-nfs-server']
     state: present
-  with_items:
-    - "nfs-kernel-server"
-    - "yast2-nfs-server"
 
 - name: Create root nfs directory
   file:
@@ -29,4 +26,4 @@
   service:
     name: nfsserver
     state: started
-    enabled: "yes"
+    enabled: "true"

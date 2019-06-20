@@ -1,0 +1,7 @@
+---
+
+- name: Deploy docker services
+  hosts: docker[0]
+  gather_facts: true
+  roles:
+  - elastic-service

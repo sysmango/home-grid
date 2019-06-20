@@ -3,9 +3,7 @@
 
 Vagrant.configure(2) do |config|
   #config.vm.box = "ubuntu/xenial64"
-  #config.vm.box = "opensuse/openSUSE-Tumbleweed-x86_64"
-	config.vm.box = "sysmango/tumbleweed"
-	config.vm.box_url = "http://localhost/~butch/tumbleweed/tumbleweed.json"
+  config.vm.box = "opensuse/openSUSE-Tumbleweed-x86_64"
   # config.vm.box_check_update = false
   config.vm.synced_folder ".", "/vagrant", disabled: true
 

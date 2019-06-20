@@ -1,24 +1,24 @@
 ---
-- src: http://nexus.sysmango.net/repository/ansible/prod/nextcloud-serice.tar.gz
-  path: roles
-  name: nextcloud-service
+#- src: git+git@github.com:sysmango/nextcloud-service.git
+#  path: roles
+#  name: nextcloud-service
 
-- src: http://nexus.sysmango.net/repository/ansible/prod/database-service.tar.gz
-  path: roles
-  name: database-service
+  #- src: http://nexus.sysmango.net/repository/ansible/prod/database-service.tar.gz
+  #path: roles
+  #name: database-service
 
-- src: git+git@bitbucket.org:sysmango/traefik-service.git
-  path: roles
-  name: traefik-service
+# - src: git+git@bitbucket.org:butch/traefik-service.git
+#   path: roles
+#   name: traefik-service
 
-- src: git+git@bitbucket.org:sysmango/elastic-service.git
-  path: roles
-  name: elastic-service
+# - src: git+git@bitbucket.org:butch/elastic-service.git
+#   path: roles
+#   name: elastic-service
 
-- src: git+git@bitbucket.org:sysmango/raffia-service.git
+- src: git+git@github.com:butchlebo/sonarqube-setup.git
   path: roles
-  name: raffia-service
+  name: sonarqube-setup
 
-- src: git+git@bitbucket.org:sysmango/camunda-service.git
+- src: git+git@github.com:butchlebo/sonarqube-service.git
   path: roles
-  name: camunda-service
+  name: sonarqube-service

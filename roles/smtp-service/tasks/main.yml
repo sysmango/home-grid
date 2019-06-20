@@ -16,7 +16,7 @@
   connection: local
   set_fact:
     smtp_password: "{{lookup('hashivault', 'smtp/emailpass', 'value')}}"
-  when: smtp_status.rc == 1  
+  when: smtp_status.rc == 1
 
 # - name: Deploy smtp service
 #   command: |
@@ -32,19 +32,19 @@
 
 - name: Deploy smtp service
   docker_swarm_service:
-   debug: true
-   name: smtp
-   hostname: smtp
-   image: lylescott/postfix-gmail-relay
-   networks:
-   - mangonet
-   env:
-   - "SYSTEM_TIMEZONE=America/New_York"
-   - "EMAIL={{ smtp_login }}"
-   - "EMAILPASS={{ smtp_password }}"
-   - "MYNETWORKS=\"10.0.0.0/8 192.168.0.0/16 172.0.0.0/8\""
-   publish:
-   - published_port: 587
-     target_port: 25
-   docker_host: tcp://sysmango.net:2375
+    debug: true
+    name: smtp
+    hostname: smtp
+    image: lylescott/postfix-gmail-relay
+    networks:
+      - mangonet
+    env:
+      - "SYSTEM_TIMEZONE=America/New_York"
+      - "EMAIL={{ smtp_login }}"
+      - "EMAILPASS={{ smtp_password }}"
+      - "MYNETWORKS=\"10.0.0.0/8 192.168.0.0/16 172.0.0.0/8\""
+    publish:
+      - published_port: 587
+        target_port: 25
+    docker_host: tcp://sysmango.net:2375
   when: smtp_status.rc == 1

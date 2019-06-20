@@ -2,8 +2,8 @@
 
 - name: Bootstrap new sysmango nodes.
   become: "true"
-  gather_facts: "no"
+  gather_facts: "true"
   hosts:
-    - files
+    - nfs_server
   roles:
-    - sysmango-bootstrap
+    - nfs-server

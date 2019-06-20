@@ -8,7 +8,7 @@
   register: nagios_status
 
 - name: Create nagios volume directory
-  become: "yes"
+  become: "true"
   file:
     path: /srv/nfs/nagios
     mode: 0777
@@ -17,7 +17,7 @@
   when: nagios_status.rc == 1
 
 - name: Create nagios local config directory etc
-  become: "yes"
+  become: "true"
   file:
     path: /srv/nfs/nagios/etc
     mode: 0777
@@ -26,7 +26,7 @@
   when: nagios_status.rc == 1
 
 - name: Create nagios local config directory var
-  become: "yes"
+  become: "true"
   file:
     path: /srv/nfs/nagios/var
     mode: 0777
@@ -35,7 +35,7 @@
   when: nagios_status.rc == 1
 
 - name: Create nagios local config directory custom
-  become: "yes"
+  become: "true"
   file:
     path: /srv/nfs/nagios/custom-plugins
     mode: 0777

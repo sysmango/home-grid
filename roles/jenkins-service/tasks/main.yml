@@ -8,7 +8,7 @@
   register: jenkins_status
 
 - name: Create jenkins volume directory
-  become: "yes"
+  become: "true"
   file:
     path: /srv/nfs/jenkins
     mode: 0777
@@ -16,31 +16,17 @@
   run_once: true
   when: jenkins_status.rc == 1
 
-- name: Create jenkins local config directory sysmango
-  become: "yes"
-  file:
-    path: /srv/nfs/jenkins/sysmango
-    mode: 0777
-    state: directory
-  run_once: true
-  when: jenkins_status.rc == 1
-
-- name: Copy docker daemon.json
-  copy:
-    src: daemon.json
-    dest: /srv/nfs/jenkins/sysmango
-
 - name: Deploy jenkins service
   command: |
     docker service create -d --name jenkins \
     --network mangonet \
     --label traefik.port=8080 \
-    --mount type=bind,src=/srv/docker-volumes/jenkins,dst=/var/jenkins_home \
+    --label traefik.enable=true \
+    --mount 'type=volume,"volume-opt=o=addr=files.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/jenkins,volume-opt=type=nfs,target=/var/jenkins_home' \
     --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-    --mount=type=bind,src=/etc/ssl/certs,dst=/etc/ssl/certs \
     --constraint=node.role==manager \
     --replicas 1 \
-    registry.sysmango.net/jenkinsci/blueocean:1.16.0
+    jenkinsci/blueocean:latest
   run_once: true
   when: jenkins_status.rc == 1
 

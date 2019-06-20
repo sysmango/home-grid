@@ -60,4 +60,8 @@ roles/elastic-service/
 roles/raffia-service/
 roles/camunda-service/
 roles/database-service/
+roles/camunda-deprovision/
+roles/sonarqube-service/
+roles/sonarqube-setup/
 
+.scannerwork/

@@ -1,0 +1,4 @@
+---
+# Minimal example using remote docker
+plugin: docker_swarm
+docker_host: tcp://sysmango.net:2375
