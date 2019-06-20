@@ -1,5 +1,4 @@
--
-
+---
 - name: Check if SMTP service is running
   shell: docker service ls | awk '{print $2}' | grep smtp
   changed_when: false
@@ -7,33 +6,45 @@
   register: smtp_status
   failed_when: smtp_status.rc == 2
 
-- name: Deploy smtp service
-  command: |
-    docker service create --name smtp \
-    --network mangonet \
-    -e SYSTEM_TIMEZONE=America/New_York \
-    -e EMAIL=bostch@gmail.com \
-    -e EMAILPASS=awtusdlwnfexuujn \
-     -e MYNETWORKS="10.0.0.0/8 192.168.0.0/16 172.0.0.0/8" \
-     --publish 587:25  \
-     lylescott/postfix-gmail-relay
+- name: Set fact to carry smtp login
+  connection: local
+  set_fact:
+    smtp_login: "{{lookup('hashivault', 'smtp/email', 'value')}}"
   when: smtp_status.rc == 1
 
+- name: Set fact to carry smtp login secret
+  connection: local
+  set_fact:
+    smtp_password: "{{lookup('hashivault', 'smtp/emailpass', 'value')}}"
+  when: smtp_status.rc == 1  
+
 # - name: Deploy smtp service
-#   docker_swarm_service:
-#    debug: yes
-#    name: smtp
-#    hostname: smtp
-#    image: lylescott/postfix-gmail-relay
-#    networks:
-#    - mangonet
-#    env:
-#    - "SYSTEM_TIMEZONE=America/New_York"
-#    - "EMAIL=bostch@gmail.com"
-#    - "EMAILPASS=awtusdlwnfexuujn"
-#    - "MYNETWORKS=\"10.0.0.0/8 192.168.0.0/16 172.0.0.0/8\""
-#    publish:
-#    - published_port: 587
-#      target_port: 25
-#    docker_host: tcp://sysmango.net:2375
+#   command: |
+#     docker service create --name smtp \
+#     --network mangonet \
+#     -e SYSTEM_TIMEZONE=America/New_York \
+#     -e EMAIL={{ smtp_login }} \
+#     -e EMAILPASS={{ smtp_password }} \
+#      -e MYNETWORKS="10.0.0.0/8 192.168.0.0/16 172.0.0.0/8" \
+#      --publish 587:25  \
+#      lylescott/postfix-gmail-relay
 #   when: smtp_status.rc == 1
+
+- name: Deploy smtp service
+  docker_swarm_service:
+   debug: true
+   name: smtp
+   hostname: smtp
+   image: lylescott/postfix-gmail-relay
+   networks:
+   - mangonet
+   env:
+   - "SYSTEM_TIMEZONE=America/New_York"
+   - "EMAIL={{ smtp_login }}"
+   - "EMAILPASS={{ smtp_password }}"
+   - "MYNETWORKS=\"10.0.0.0/8 192.168.0.0/16 172.0.0.0/8\""
+   publish:
+   - published_port: 587
+     target_port: 25
+   docker_host: tcp://sysmango.net:2375
+  when: smtp_status.rc == 1

@@ -25,23 +25,23 @@
 #     record: viz.sysmango.net
 #     type: A
 #     value: 192.168.1.144,192.168.1.225,192.168.1.200
-#     overwrite: "yes"
-#     wait: "yes"
+#     overwrite: "true"
+#     wait: "true"
 
 - name: Deploy Docker Visualizer service
   docker_swarm_service:
-    debug: yes
+    debug: true
     name: viz
     image: dockersamples/visualizer
     networks:
-    - mangonet
+      - mangonet
     labels:
-      "traefik.port=8080"
+      traefik.port=8080
     constraints:
-    - "node.role==manager"
+      - "node.role==manager"
     mounts:
-    - type: bind
-      source: "/var/run/docker.sock"
-      target: "/var/run/docker.sock"
+      - type: bind
+        source: "/var/run/docker.sock"
+        target: "/var/run/docker.sock"
     docker_host: tcp://sysmango.net:2375
   when: viz_status.rc == 1

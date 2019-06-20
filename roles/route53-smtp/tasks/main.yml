@@ -6,9 +6,9 @@
     zone: sysmango.net
     record: smtp.sysmango.net
     type: A
-    value: 192.168.1.144,192.168.1.225,192.168.1.200
-    overwrite: yes
-    wait: yes
+    value: 192.168.1.143,192.168.1.225,192.168.1.200
+    overwrite: true
+    wait: true
 
 - name: Register registry name with Route53
   route53:
@@ -16,9 +16,9 @@
     zone: sysmango.net
     record: registry.sysmango.net
     type: A
-    value: 192.168.1.144,192.168.1.225,192.168.1.200
-    overwrite: yes
-    wait: yes
+    value: 192.168.1.143,192.168.1.225,192.168.1.200
+    overwrite: true
+    wait: true
 
 - name: Register jenkins name with Route53
   route53:
@@ -26,9 +26,9 @@
     zone: sysmango.net
     record: jenkins.sysmango.net
     type: A
-    value: 192.168.1.144,192.168.1.225,192.168.1.200
-    overwrite: yes
-    wait: yes
+    value: 192.168.1.143,192.168.1.225,192.168.1.200
+    overwrite: true
+    wait: true
 
 - name: Register jira name with Route53
   route53:
@@ -36,9 +36,9 @@
     zone: sysmango.net
     record: jira.sysmango.net
     type: A
-    value: 192.168.1.144,192.168.1.225,192.168.1.200
-    overwrite: yes
-    wait: yes
+    value: 192.168.1.143,192.168.1.225,192.168.1.200
+    overwrite: true
+    wait: true
 
 - name: Register nagios name with Route53
   route53:
@@ -46,9 +46,9 @@
     zone: sysmango.net
     record: nagios.sysmango.net
     type: A
-    value: 192.168.1.144,192.168.1.225,192.168.1.200
-    overwrite: yes
-    wait: yes
+    value: 192.168.1.143,192.168.1.225,192.168.1.200
+    overwrite: true
+    wait: true
 
 - name: Register kibana name with Route53
   route53:
@@ -56,6 +56,6 @@
     zone: sysmango.net
     record: kibana.sysmango.net
     type: A
-    value: 192.168.1.144,192.168.1.225,192.168.1.200
-    overwrite: yes
-    wait: yes
+    value: 192.168.1.143,192.168.1.225,192.168.1.200
+    overwrite: true
+    wait: true
