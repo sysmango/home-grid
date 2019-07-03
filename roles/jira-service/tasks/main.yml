@@ -43,6 +43,10 @@
     --mount 'type=volume,"volume-opt=o=addr=files.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/jira/data,volume-opt=type=nfs,target=/var/atlassian/jira' \
     --mount 'type=volume,"volume-opt=o=addr=files.sysmango.net,vers=4.1",volume-opt=device=:/srv/nfs/jira/logs,volume-opt=type=nfs,target=/var/atlassian/jira/logs' \
     --replicas 1 \
+    -e CATALINA_CONNECTOR_PROXYNAME=jira.sysmango.net \
+    -e CATALINA_CONNECTOR_PROXYPORT=443 \
+    -e CATALINA_CONNECTOR_SCHEME=https \
+    -e CATALINA_CONNECTOR_SECURE=true \
     registry.sysmango.net/sysmango/jira:latest
   run_once: true
   when: jira_status.rc == 1
