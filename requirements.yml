@@ -1,19 +1,15 @@
 ---
-#- src: git+git@github.com:sysmango/nextcloud-service.git
-#  path: roles
-#  name: nextcloud-service
+- src: git+git@github.com:sysmango/nextcloud-service.git
+  path: roles
+  name: nextcloud-service
 
-  #- src: http://nexus.sysmango.net/repository/ansible/prod/database-service.tar.gz
-  #path: roles
-  #name: database-service
+- src: git+git@github.com:sysmango/database-service.git
+  path: roles
+  name: database-service
 
-# - src: git+git@bitbucket.org:butch/traefik-service.git
-#   path: roles
-#   name: traefik-service
-
-# - src: git+git@bitbucket.org:butch/elastic-service.git
-#   path: roles
-#   name: elastic-service
+- src: git+git@bitbucket.org:butch/traefik-service.git
+  path: roles
+  name: traefik-service
 
 - src: git+git@github.com:butchlebo/sonarqube-setup.git
   path: roles
@@ -22,3 +18,11 @@
 - src: git+git@github.com:butchlebo/sonarqube-service.git
   path: roles
   name: sonarqube-service
+
+- src: git+git@github.com:butchlebo/jira-setup.git
+  path: roles
+  name: jira-setup
+
+- src: git+git@github.com:butchlebo/jira-service.git
+  path: roles
+  name: jira-service

@@ -63,6 +63,8 @@ roles/database-service/
 roles/camunda-deprovision/
 roles/sonarqube-service/
 roles/sonarqube-setup/
+roles/jira-service/
+roles/jira-setup/
 
 .scannerwork/
 .vscode/
