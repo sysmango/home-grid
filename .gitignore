@@ -65,6 +65,7 @@ roles/sonarqube-service/
 roles/sonarqube-setup/
 roles/jira-service/
 roles/jira-setup/
+roles/nexus-service/
 
 .scannerwork/
 .vscode/
