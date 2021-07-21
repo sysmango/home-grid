@@ -1,4 +1,8 @@
 ---
+collections:
+- name: community.docker
+
+roles:
 - src: git+git@github.com:sysmango/nextcloud-service.git
   path: roles
   name: nextcloud-service
@@ -26,3 +30,7 @@
 - src: git+git@github.com:butchlebo/jira-service.git
   path: roles
   name: jira-service
+
+- src: git+git@github.com:butchlebo/vault-service.git
+  path: roles
+  name: vault-service
